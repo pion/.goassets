@@ -1,0 +1,29 @@
+name: assets-sync
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: sync
+        uses: at-wat/assets-sync-action@v0
+        with:
+          repos: |
+            pion/datachannel
+            pion/dtls
+            pion/ice
+            pion/logging
+            pion/quic
+            pion/rtcp
+            pion/rtp
+            pion/sctp
+            pion/sdp
+            pion/srtp
+            pion/transport
+          git_user: Pion Bot
+          git_email: TBD
+          github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
