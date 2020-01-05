@@ -1,6 +1,13 @@
 # .goassets
 Asset files automatically deployed to Go package repositories
 
+### Usage
+This repository has master data of the asset files like the lint scripts, coverage report config, renovate config.
+Please make a pull-request on this repository to update these files, instead of editing them in each repository.
+
+After updating the files, add a version tag to this repository.
+GitHub Action will open pull-requests on the target repositories to sync the changes.
+
 ### Contributing
 Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contributing)** to join the group of amazing people making this project possible:
 
