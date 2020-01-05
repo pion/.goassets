@@ -27,3 +27,7 @@ jobs:
           git_user: Pion Bot
           git_email: TBD
           github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
+          commit_message: |
+            Update assets to %v
+
+            Update lint scripts and CI configs.
