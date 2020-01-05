@@ -25,7 +25,7 @@ jobs:
             pion/srtp
             pion/transport
           git_user: Pion Bot
-          git_email: TBD
+          git_email: 59523206+pionbot@users.noreply.github.com
           github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
           commit_message: |
             Update assets to %v
