@@ -26,7 +26,7 @@ jobs:
             export TRAVIS_COMMIT_RANGE=origin/${{ github.base_ref }}...origin/${{ github.head_ref }}
           else
             git fetch --depth=50 origin ${{ github.ref }}
-            export TRAVIS_COMMIT_RANGE=$(git log --format="%H" | tail -n1)...origin/${{ github.ref }}
+            export TRAVIS_COMMIT_RANGE=$(git log --format="%H" | tail -n1)...${{ github.ref }}
           fi
           git log --oneline --graph ${TRAVIS_COMMIT_RANGE}
           .github/lint-commit-message.sh
