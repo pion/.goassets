@@ -16,7 +16,7 @@ fi
 
 SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
-EXCLUDED_CONTIBUTORS=('John R. Bradley' 'renovate[bot]' 'Renovate Bot', 'Pion Bot')
+EXCLUDED_CONTIBUTORS=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot')
 MISSING_CONTIBUTORS=()
 
 shouldBeIncluded () {
