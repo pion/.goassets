@@ -56,7 +56,7 @@ test_i386_job: &test_i386_job
   language: bash
   services: docker
   install:
-      # i386/golang:1.12-alpine doesn't have git.
+    # i386/golang:1.12-alpine doesn't have git.
     - echo -e "FROM i386/golang:${GO_VERSION}-alpine\nRUN apk add --no-cache git" > Dockerfile
     - docker build -t go-tester .
   script:
@@ -83,12 +83,18 @@ test_wasm_job: &test_wasm_job
     - export GOROOT=${HOME}/go
     - export PATH=${GOROOT}/bin:${PATH}
     - yarn install
+    - export GO_JS_WASM_EXEC=${GOROOT}/misc/wasm/go_js_wasm_exec
+    # If the repository has wasm_exec hook, use it.
+    - |
+      if [ -f test-wasm/go_js_wasm_exec ]; then
+        export GO_JS_WASM_EXEC=test-wasm/go_js_wasm_exec
+      fi
   script:
     - coverpkgs=$(go list ./... | grep -v examples | paste -s -d ',')
     - |
       GOOS=js GOARCH=wasm go test \
         -coverpkg=${coverpkgs} -coverprofile=cover.out -covermode=atomic \
-        -exec="${GOROOT}/misc/wasm/go_js_wasm_exec" \
+        -exec="${GO_JS_WASM_EXEC}" \
         -v .
   after_success:
     - travis_retry bash <(curl -s https://codecov.io/bash) -c -F wasm
