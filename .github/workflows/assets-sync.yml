@@ -49,6 +49,7 @@ jobs:
             pion/sdp
             pion/srtp
             pion/transport
+            pion/turn
           root_dir: travis-simple
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
