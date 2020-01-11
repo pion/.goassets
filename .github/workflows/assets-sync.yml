@@ -39,6 +39,7 @@ jobs:
         with:
           repos: |
             pion/datachannel
+            pion/dtls
             pion/ice
             pion/logging
             pion/quic
