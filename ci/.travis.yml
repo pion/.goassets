@@ -105,9 +105,6 @@ test_wasm_job: &test_wasm_job
 jobs:
   include:
     - <<: *lint_job
-      name: Lint 1.12
-      go: 1.12
-    - <<: *lint_job
       name: Lint 1.13
       go: 1.13
     - <<: *test_job
