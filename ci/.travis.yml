@@ -98,7 +98,7 @@ test_wasm_job: &test_wasm_job
       GOOS=js GOARCH=wasm go test \
         -coverpkg=${coverpkgs} -coverprofile=cover.out -covermode=atomic \
         -exec="${GO_JS_WASM_EXEC}" \
-        -v .
+        -v ./...
   after_success:
     - travis_retry bash <(curl -s https://codecov.io/bash) -c -F wasm
 
