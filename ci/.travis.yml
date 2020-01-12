@@ -92,7 +92,7 @@ test_wasm_job: &test_wasm_job
     # If the repository has wasm_exec hook, use it.
     - |
       if [ -f test-wasm/go_js_wasm_exec ]; then
-        export GO_JS_WASM_EXEC=test-wasm/go_js_wasm_exec
+        export GO_JS_WASM_EXEC=${PWD}/test-wasm/go_js_wasm_exec
       fi
   script:
     - testpkgs=$(go list ./... | grep -v examples)
