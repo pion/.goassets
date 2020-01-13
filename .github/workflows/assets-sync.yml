@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: sync lint scripts
+      - name: sync CI configs
         uses: at-wat/assets-sync-action@v0
         with:
           repos: |
