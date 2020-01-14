@@ -1,6 +1,8 @@
 # .goassets
 Asset files automatically deployed to Go package repositories
 
+[Search ongoing sync pull-requests.](https://github.com/search?q=org%3Apion+type%3Apr+author%3Apionbot+is%3Aopen&type=Issues)
+
 ### Usage
 This repository has master data of the asset files like the lint scripts, coverage report config, renovate config.
 Please make a pull-request on this repository to update these files, instead of editing them in each repository.
