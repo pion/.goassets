@@ -17,6 +17,7 @@ jobs:
             pion/dtls
             pion/ice
             pion/logging
+            pion/mdns
             pion/quic
             pion/rtcp
             pion/rtp
@@ -34,3 +35,19 @@ jobs:
             Update CI configs to %v
 
             Update lint scripts and CI configs.
+      - name: sync CI configs
+        uses: at-wat/assets-sync-action@v0
+        with:
+          repos: |
+            pion/stun
+          root_dir: ci
+          exclude_paths: |
+            codecov.yml
+          git_user: Pion Bot
+          git_email: 59523206+pionbot@users.noreply.github.com
+          github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
+          commit_message: |
+            Update CI configs to %v
+
+            Update lint scripts and CI configs.
+            Excluding codecov.yml.
