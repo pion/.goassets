@@ -90,6 +90,7 @@ _test_wasm_job: &test_wasm_job
         export GO_JS_WASM_EXEC=${PWD}/test-wasm/go_js_wasm_exec
       fi
   script:
+    - if [ -n "$(find . -name ".no-wasm-test" -print)" ]; then exit 0; fi
     - testpkgs=$(go list ./... | grep -v examples)
     - coverpkgs=$(go list ./... | grep -v examples | paste -s -d ',')
     - |
