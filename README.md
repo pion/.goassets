@@ -18,6 +18,7 @@ Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contribu
 * [Atsushi Watanabe](https://github.com/at-wat) - *Sync files among repositories*
 * [Daniele Sluijters](https://github.com/daenney) - *Misc fixes*
 * [Luke S](https://github.com/encounter)
+* [Aurken Bilbao](https://github.com/aurkenb) - *Misc fixes*
 
 ### License
 MIT License - see [LICENSE](LICENSE) for full text
