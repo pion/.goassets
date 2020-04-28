@@ -21,11 +21,11 @@ then
   . ${SCRIPT_PATH}/.ci.conf
 fi
 
-EXCLUDED_CONTIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot')
-MISSING_CONTIBUTORS=()
+EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot')
+MISSING_CONTRIBUTORS=()
 
 shouldBeIncluded () {
-	for i in "${EXCLUDED_CONTIBUTORS[@]}"
+	for i in "${EXCLUDED_CONTRIBUTORS[@]}"
 	do
 		if [ "$i" == "$1" ] ; then
 			return 1
@@ -40,15 +40,15 @@ for contributor in $(git log --format='%aN' | sort -u)
 do
 	if shouldBeIncluded $contributor; then
 		if ! grep -q "$contributor" "$SCRIPT_PATH/../README.md"; then
-			MISSING_CONTIBUTORS+=("$contributor")
+			MISSING_CONTRIBUTORS+=("$contributor")
 		fi
 	fi
 done
 unset IFS
 
-if [ ${#MISSING_CONTIBUTORS[@]} -ne 0 ]; then
+if [ ${#MISSING_CONTRIBUTORS[@]} -ne 0 ]; then
     echo "Please add the following contributors to the README"
-    for i in "${MISSING_CONTIBUTORS[@]}"
+    for i in "${MISSING_CONTRIBUTORS[@]}"
     do
 	    echo "$i"
     done
