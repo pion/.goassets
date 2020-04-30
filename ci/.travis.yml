@@ -61,7 +61,6 @@ _test_job: &test_job
     - travis_retry bash <(curl -s https://codecov.io/bash) -c -F go
 _test_i386_job: &test_i386_job
   env: CACHE_NAME=test386
-  language: bash
   services: docker
   before_install:
     - if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
@@ -120,9 +119,11 @@ jobs:
     - <<: *test_i386_job
       name: Test i386 1.13
       env: GO_VERSION=1.13
+      go: 1.14  # version for host environment used to go list
     - <<: *test_i386_job
       name: Test i386 1.14
       env: GO_VERSION=1.14
+      go: 1.14  # version for host environment used to go list
     - <<: *test_wasm_job
       name: Test WASM 1.13
       env: GO_VERSION=1.13
