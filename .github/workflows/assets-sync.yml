@@ -16,7 +16,6 @@ jobs:
             pion/datachannel
             pion/dtls
             pion/ice
-            pion/ion
             pion/logging
             pion/mdns
             pion/quic

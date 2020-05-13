@@ -19,6 +19,7 @@ Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contribu
 * [Daniele Sluijters](https://github.com/daenney) - *Misc fixes*
 * [Luke S](https://github.com/encounter)
 * [Aurken Bilbao](https://github.com/aurkenb) - *Misc fixes*
+* [Tarrence van As](https://github.com/tarrencev)
 
 ### License
 MIT License - see [LICENSE](LICENSE) for full text
