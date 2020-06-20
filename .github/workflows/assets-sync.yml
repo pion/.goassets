@@ -27,6 +27,7 @@ jobs:
             pion/transport
             pion/turn
             pion/webrtc
+            pion/udp
           root_dir: ci
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com

@@ -20,6 +20,7 @@ Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contribu
 * [Luke S](https://github.com/encounter)
 * [Aurken Bilbao](https://github.com/aurkenb) - *Misc fixes*
 * [Tarrence van As](https://github.com/tarrencev)
+* [Michiel De Backker](https://github.com/backkem) - *Add pion/udp*
 
 ### License
 MIT License - see [LICENSE](LICENSE) for full text
