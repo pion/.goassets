@@ -21,12 +21,17 @@ jobs:
       - name: lint commit message
         run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-          if [ "${GITHUB_EVENT_NAME}" == "pull_request" ]; then
-            git fetch --depth=50 origin ${{ github.base_ref }} ${{ github.head_ref }}
-            export TRAVIS_COMMIT_RANGE=origin/${{ github.base_ref }}...origin/${{ github.head_ref }}
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            echo "This is a pull request build"
+            base_sha=$(git show --pretty=raw | grep '^parent' | cut -f2 -d' ' | sed -n '1p')
+            head_sha=$(git show --pretty=raw | grep '^parent' | cut -f2 -d' ' | sed -n '2p')
+            export TRAVIS_COMMIT_RANGE=${base_sha}...${head_sha}
           else
+            echo "This is a branch build"
             git fetch --depth=50 origin ${{ github.ref }}
             export TRAVIS_COMMIT_RANGE=$(git log --format="%H" | tail -n1)...${{ github.ref }}
           fi
+          echo "Emulated TRAVIS_COMMIT_RANGE: ${TRAVIS_COMMIT_RANGE}"
           git log --oneline --graph ${TRAVIS_COMMIT_RANGE}
+          echo "Linting commit message"
           .github/lint-commit-message.sh
