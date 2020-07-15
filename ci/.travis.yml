@@ -43,7 +43,7 @@ _lint_job: &lint_job
     - bash .github/lint-disallowed-functions-in-library.sh
     - bash .github/lint-commit-message.sh
     - bash .github/lint-filename.sh
-    - golangci-lint run ./...
+    - golangci-lint run ${GOLANGCI_LINT_EXRA_ARGS:-} ./...
 _test_job: &test_job
   env: CACHE_NAME=test
   before_install:
