@@ -33,5 +33,5 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v1
         with:
-          version: v1.29
+          version: v1.19.1
           args: $GOLANGCI_LINT_EXRA_ARGS
