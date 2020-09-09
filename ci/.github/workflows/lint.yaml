@@ -20,7 +20,7 @@ jobs:
 
         - name: Contributors
           run: .github/assert-contributors.sh
-        
+
         - name: Functions
           run: .github/lint-disallowed-functions-in-library.sh
 
