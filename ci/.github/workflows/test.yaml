@@ -104,7 +104,7 @@ jobs:
 
       - name: Set Go Root
         run: echo ::set-env name=GOROOT::${HOME}/go
-      
+
       - name: Set Go Path
         run: echo ::set-env name=GOPATH::${HOME}/go
 
