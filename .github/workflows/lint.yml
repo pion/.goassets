@@ -1,11 +1,10 @@
-name: lint
+name: Lint
 on:
-  push:
-    branches:
-      - master
   pull_request:
-    branches:
-      - master
+    types:
+      - opened
+      - edited
+      - synchronize
 jobs:
   commit-lint:
     runs-on: ubuntu-latest
@@ -13,25 +12,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 50
+          fetch-depth: 0
       - name: copy scripts
         run: cp ci/.github/*.sh .github/
       - name: assert contributors
         run: .github/assert-contributors.sh
       - name: lint commit message
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            echo "This is a pull request build"
-            base_sha=$(git show --pretty=raw | grep '^parent' | cut -f2 -d' ' | sed -n '1p')
-            head_sha=$(git show --pretty=raw | grep '^parent' | cut -f2 -d' ' | sed -n '2p')
-            export TRAVIS_COMMIT_RANGE=${base_sha}...${head_sha}
-          else
-            echo "This is a branch build"
-            git fetch --depth=50 origin ${{ github.ref }}
-            export TRAVIS_COMMIT_RANGE=$(git log --format="%H" | tail -n1)...${{ github.ref }}
-          fi
-          echo "Emulated TRAVIS_COMMIT_RANGE: ${TRAVIS_COMMIT_RANGE}"
-          git log --oneline --graph ${TRAVIS_COMMIT_RANGE}
-          echo "Linting commit message"
-          .github/lint-commit-message.sh
+        run: .github/lint-commit-message.sh
