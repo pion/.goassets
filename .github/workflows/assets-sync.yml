@@ -16,6 +16,8 @@ jobs:
             pion/datachannel
             pion/dtls
             pion/ice
+            pion/interceptor
+            pion/ion-avp
             pion/logging
             pion/mdns
             pion/quic
@@ -26,9 +28,8 @@ jobs:
             pion/srtp
             pion/transport
             pion/turn
-            pion/webrtc
             pion/udp
-            pion/ion-avp
+            pion/webrtc
           root_dir: ci
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
