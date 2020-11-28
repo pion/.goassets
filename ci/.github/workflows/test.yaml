@@ -52,9 +52,9 @@ jobs:
           path: |
             ~/go/pkg/mod
             ~/.cache
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-i386-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-go-
+            ${{ runner.os }}-i386-go-
 
       - name: Run test
         run: |
@@ -89,9 +89,9 @@ jobs:
           path: |
             ~/go/pkg/mod
             ~/.cache
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          key: ${{ runner.os }}-wasm-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-go-
+            ${{ runner.os }}-wasm-go-
 
       - name: Download Go
         run: curl -sSfL https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar -C ~ -xzf -
