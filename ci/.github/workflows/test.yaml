@@ -67,6 +67,7 @@ jobs:
 
       - name: Run test
         run: |
+          mkdir -p $HOME/go/pkg/mod $HOME/.cache
           docker run \
           -u $(id -u):$(id -g) \
           -e "GO111MODULE=on" \
