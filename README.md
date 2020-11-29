@@ -22,6 +22,7 @@ Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contribu
 * [Tarrence van As](https://github.com/tarrencev)
 * [Michiel De Backker](https://github.com/backkem) - *Add pion/udp*
 * [ZHENK](https://github.com/scorpionknifes)
+* [Adam Kiss](https://github.com/masterada) - *Added .gitignore*
 
 ### License
 MIT License - see [LICENSE](LICENSE) for full text
