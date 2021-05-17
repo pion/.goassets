@@ -33,7 +33,7 @@ jobs:
           root_dir: ci
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
-          github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
+          github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
           commit_message: |
             Update CI configs to %v
 
@@ -48,7 +48,7 @@ jobs:
             codecov.yml
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
-          github_token: ${{ secrets.GITHUB_TOKEN_REPO }}
+          github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
           commit_message: |
             Update CI configs to %v
 
