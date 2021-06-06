@@ -15,7 +15,5 @@ jobs:
           fetch-depth: 0
       - name: copy scripts
         run: cp ci/.github/*.sh .github/
-      - name: assert contributors
-        run: .github/assert-contributors.sh
       - name: lint commit message
         run: .github/lint-commit-message.sh
