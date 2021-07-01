@@ -22,7 +22,7 @@ fi
 #
 # DO NOT EDIT THIS
 #
-EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot')
+EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot' 'pionbot')
 # If you want to exclude a name from all repositories, send a PR to
 # https://github.com/pion/.goassets instead of this repository.
 # If you want to exclude a name only from this repository,
@@ -33,7 +33,7 @@ CONTRIBUTORS=()
 shouldBeIncluded () {
 	for i in "${EXCLUDED_CONTRIBUTORS[@]}"
 	do
-		if [ "$i" == "$1" ] ; then
+		if [[ $1 =~ "$i" ]]; then
 			return 1
 		fi
 	done
