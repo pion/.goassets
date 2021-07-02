@@ -17,7 +17,6 @@ jobs:
             pion/dtls
             pion/ice
             pion/interceptor
-            pion/ion-avp
             pion/logging
             pion/mdns
             pion/quic
