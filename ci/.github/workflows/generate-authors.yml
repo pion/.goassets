@@ -39,7 +39,9 @@ jobs:
         echo "::set-output name=msg::$(git status -s | wc -l)"
 
     - uses: stefanzweifel/git-auto-commit-action@v4
-      if: ${{ steps.git-status-output.outputs.msg != '0' }}
+      env:
+        PIONBOT_PRIVATE_KEY: ${{ secrets.PIONBOT_PRIVATE_KEY }}
+      if: ${{ steps.git-status-output.outputs.msg != '0' && env.PIONBOT_PRIVATE_KEY != null }}
       with:
         commit_message: ${{ steps.last-commit-message.outputs.msg }}
         commit_author: ${{ steps.last-commit-author.outputs.msg }}
