@@ -17,6 +17,7 @@ jobs:
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
           github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
+          force_push: true
           commit_message: |
             Update CI configs to %v
 
