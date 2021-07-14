@@ -9,7 +9,10 @@ Asset files automatically deployed to Go package repositories
 This repository has master data of the asset files like the lint scripts, coverage report config, renovate config.
 Please make a pull-request on this repository to update these files, instead of editing them in each repository.
 
-After updating the files, add a version tag to this repository.
+After merging changes to the master branch, a pull-request to sync the changes to https://github.com/pion/ci-sandbox will be automatically opened.
+Feel free to commit sample data to ci-sandbox repository to test the changes.
+
+When it is ready to sync to the all repositories, add a version tag to this repository.
 GitHub Action will open pull-requests on the target repositories to sync the changes.
 
 ### Contributing
