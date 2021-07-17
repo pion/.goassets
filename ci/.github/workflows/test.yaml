@@ -54,6 +54,11 @@ jobs:
           -bench=. \
           -v -race
 
+      - name: Run TEST_HOOK
+        run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${TEST_HOOK}" ]; then ${TEST_HOOK}; fi
+
       - uses: codecov/codecov-action@v1
         with:
           file: ./cover.out
