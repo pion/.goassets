@@ -50,8 +50,11 @@ jobs:
 
       - name: Run test
         run: |
+          TEST_BENCH_OPTION="-bench=."
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+
           go-acc -o cover.out ./... -- \
-          -bench=. \
+          ${TEST_BENCH_OPTION} \
           -v -race
 
       - name: Run TEST_HOOK
