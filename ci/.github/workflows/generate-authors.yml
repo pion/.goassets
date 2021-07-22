@@ -29,20 +29,25 @@ jobs:
 
   generate-authors:
     needs: [checksecret]
-    if: needs.checksecret.outputs.is_PIONBOT_PRIVATE_KEY_set == 'true'
     runs-on: ubuntu-latest
+    if: github.actor != 'pionbot'
     steps:
     - uses: actions/checkout@v2
+      if: needs.checksecret.outputs.is_PIONBOT_PRIVATE_KEY_set == 'true'
       with:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
         token: ${{ secrets.PIONBOT_PRIVATE_KEY }}
+    - uses: actions/checkout@v2
+      if: needs.checksecret.outputs.is_PIONBOT_PRIVATE_KEY_set != 'true'
+      with:
+        repository: ${{ github.pull_request.head.repo.full_name }}
+        ref: ${{ github.pull_request.head.ref }}
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Generate the authors file
       run: .github/generate-authors.sh
-
-    - name: Add the authors file to git
-      run: git add AUTHORS.txt
 
     - name: Get last commit message
       id: last-commit-message
@@ -64,10 +69,17 @@ jobs:
         echo "::set-output name=msg::$(git status -s | wc -l)"
 
     - name: Commit and push
-      if: ${{ steps.git-status-output.outputs.msg != '0' }}
+      if: steps.git-status-output.outputs.msg != '0' && needs.checksecret.outputs.is_PIONBOT_PRIVATE_KEY_set == 'true'
       run: |
         git config user.email $(echo "${{ steps.last-commit-author.outputs.msg }}" | sed 's/\(.\+\) <\(\S\+\)>/\2/')
         git config user.name $(echo "${{ steps.last-commit-author.outputs.msg }}" | sed 's/\(.\+\) <\(\S\+\)>/\1/')
         git add AUTHORS.txt
         git commit --amend --no-edit
         git push --force https://github.com/${GITHUB_REPOSITORY} $(git symbolic-ref -q --short HEAD)
+
+    - name: Add annotation about updating AUTHORS.txt
+      if: steps.git-status-output.outputs.msg != '0' && needs.checksecret.outputs.is_PIONBOT_PRIVATE_KEY_set != 'true'
+      run: |
+        line=$(git diff | sed -n '/^@@/s/@@ -\([0-9]\)\+,.*/\1/p' | head -n1)
+        patch="$(git diff | sed -s 's/%/%25/g;s/$/%0A/g;' | tr -d '\n')"
+        echo "::error file=AUTHORS.txt,line=${line},col=0::Thank you for your contribution @${{ github.actor }}!%0ADo you mind updating AUTHORS.txt as following?%0A%0A${patch}%0A"
