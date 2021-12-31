@@ -19,6 +19,7 @@ jobs:
             pion/interceptor
             pion/logging
             pion/mdns
+            pion/peerconnection_explainer
             pion/rtcp
             pion/rtp
             pion/sctp
