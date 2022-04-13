@@ -43,6 +43,11 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
+      - name: Setup go-acc
+        run: |
+          go get github.com/ory/go-acc
+          git checkout go.mod go.sum
+
       - name: Set up gotestfmt
         uses: haveyoudebuggedit/gotestfmt-action@v2
         with:
@@ -54,7 +59,7 @@ jobs:
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
 
           set -euo pipefail
-          go test -coverprofile=cover.out -covermode=atomic \
+          go-acc -o cover.out ./... \
             ${TEST_BENCH_OPTION} \
             -json \
             -v -race \
