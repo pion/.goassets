@@ -59,7 +59,7 @@ jobs:
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
 
           set -euo pipefail
-          go-acc -o cover.out ./... \
+          go-acc -o cover.out ./... -- \
             ${TEST_BENCH_OPTION} \
             -json \
             -v -race 2>&1 | tee /tmp/gotest.log | gotestfmt
