@@ -20,6 +20,7 @@ jobs:
             pion/logging
             pion/mdns
             pion/peerconnection_explainer
+            pion/randutil
             pion/rtcp
             pion/rtp
             pion/sctp
