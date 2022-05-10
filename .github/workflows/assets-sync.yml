@@ -31,6 +31,7 @@ jobs:
             pion/udp
             pion/webrtc
           root_dir: ci
+          push_interval: 10
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
           github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
