@@ -48,9 +48,7 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Setup go-acc
-        run: |
-          go get github.com/ory/go-acc
-          git checkout go.mod go.sum
+        run: go install github.com/ory/go-acc@latest
 
       - name: Set up gotestfmt
         uses: haveyoudebuggedit/gotestfmt-action@v2
