@@ -12,7 +12,7 @@
         "latest-go-version"
       ],
       "matchStrings": [
-        "golang_version=(?<currentValue>[0-9.]+)"
+        "go_version=(?<currentValue>[0-9.]+)"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "golang",
