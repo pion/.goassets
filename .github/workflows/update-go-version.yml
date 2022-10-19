@@ -1,0 +1,37 @@
+name: update-go-version
+on:
+  push:
+    branches:
+      - renovate/golang-1.x
+
+jobs:
+  update:
+    if: github.actor == 'renovate[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Update Go versions
+        run: |
+          . latest-go-version
+          go_major=$(echo ${go_version} | sed 's/^\([0-9]\+\)\.[0-9]\+$/\1/')
+          go_minor=$(echo ${go_version} | sed 's/^[0-9]\+\.\([0-9]\+\)$/\1/')
+          go_minor_prev=$((${go_minor} - 1))
+          go_version_prev=${go_major}.${go_minor_prev}
+
+          workflows="$(find ./ci/.github/workflows -name "*.yaml" -o -name "*.yml")"
+          sed "s|\[.*\]\( # auto-update/supported-go-version-list\)|['${go_version}', '${go_version_prev}']\1|" -i ${workflows}
+          sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/latest-go-version\)|'${go_version}'\1|" -i ${workflows}
+      - name: Commit changes
+        run: |
+          git config --global user.name "Pion Bot"
+          git config --global user.email "59523206+pionbot@users.noreply.github.com"
+          then
+            echo -e "machine github.com\nlogin ${{ secrets.PIONBOT_PRIVATE_KEY }}" > ~/.netrc
+            git add ./ci/.github/workflows
+            git commit --amend --no-edit
+            git push origin -f ${GITHUB_REF#refs/heads/}
+            rm ~/.netrc
+          fi
