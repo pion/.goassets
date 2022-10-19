@@ -28,6 +28,7 @@ jobs:
         run: |
           git config --global user.name "Pion Bot"
           git config --global user.email "59523206+pionbot@users.noreply.github.com"
+          if ! git diff --exit-code
           then
             echo -e "machine github.com\nlogin ${{ secrets.PIONBOT_PRIVATE_KEY }}" > ~/.netrc
             git add ./ci/.github/workflows
