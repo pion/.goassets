@@ -1,0 +1,24 @@
+name: assets-sync
+on:
+  push:
+    branches:
+      - master
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: sync CI configs
+        uses: at-wat/assets-sync-action@v0
+        with:
+          repos: pion/ci-sandbox
+          root_dir: ci
+          git_user: Pion Bot
+          git_email: 59523206+pionbot@users.noreply.github.com
+          github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
+          force_push: true
+          commit_message: |
+            Update CI configs to %v
+
+            Update lint scripts and CI configs.
