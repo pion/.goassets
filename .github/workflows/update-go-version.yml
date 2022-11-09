@@ -23,7 +23,7 @@ jobs:
           go_version_prev=${go_major}.${go_minor_prev}
 
           workflows="$(find ./ci/.github/workflows -name "*.yaml" -o -name "*.yml")"
-          sed "s|\[.*\]\( # auto-update/supported-go-version-list\)|['${go_version}', '${go_version_prev}']\1|" -i ${workflows}
+          sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/previous-go-version\)|'${go_version_prev}'\1|" -i ${workflows}
           sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/latest-go-version\)|'${go_version}'\1|" -i ${workflows}
       - name: Commit changes
         run: |

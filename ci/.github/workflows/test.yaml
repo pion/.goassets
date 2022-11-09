@@ -17,6 +17,19 @@ on:
   pull_request:
     branches:
     - master
+  workflow_call:
+    inputs:
+      go_prev:
+        description: 'Go version -1'
+        default: 1.17 # auto-update/previous-go-version
+        required: false
+        type: string
+      go:
+        description: 'Go version'
+        default: 1.18 # auto-update/latest-go-version
+        required: false
+        type: string
+
 
 permissions:
   contents: read
@@ -26,7 +39,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: ["1.17", "1.18"] # auto-update/supported-go-version-list
+        go:
+          - ${{ inputs.go_prev }}
+          - ${{ inputs.go }}
       fail-fast: false
     name: Go ${{ matrix.go }}
     steps:
@@ -89,7 +104,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: ["1.17", "1.18"] # auto-update/supported-go-version-list
+        go:
+          - ${{ inputs.go_prev }}
+          - ${{ inputs.go }}
       fail-fast: false
     name: Go i386 ${{ matrix.go }}
     steps:
@@ -145,7 +162,7 @@ jobs:
       - name: Download Go
         run: curl -sSfL https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar -C ~ -xzf -
         env:
-          GO_VERSION: 1.17 # auto-update/latest-go-version
+          GO_VERSION: ${{ inputs.go }}
 
       - name: Set Go Root
         run: echo "GOROOT=${HOME}/go" >> $GITHUB_ENV
