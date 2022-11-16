@@ -15,8 +15,7 @@ SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 GIT_WORKDIR=${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}
 AUTHORS_PATH="${GIT_WORKDIR}/AUTHORS.txt"
 
-if [ -f ${SCRIPT_PATH}/.ci.conf ]
-then
+if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
   . ${SCRIPT_PATH}/.ci.conf
 fi
 
@@ -32,8 +31,7 @@ EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion B
 CONTRIBUTORS=()
 
 shouldBeIncluded () {
-	for i in "${EXCLUDED_CONTRIBUTORS[@]}"
-	do
+	for i in "${EXCLUDED_CONTRIBUTORS[@]}"; do
 		if [[ $1 =~ "$i" ]]; then
 			return 1
 		fi
@@ -43,8 +41,7 @@ shouldBeIncluded () {
 
 
 IFS=$'\n' #Only split on newline
-for CONTRIBUTOR in $(git log --format='%aN <%aE>' | LC_ALL=C.UTF-8 sort -uf)
-do
+for CONTRIBUTOR in $(git log --format='%aN <%aE>' | LC_ALL=C.UTF-8 sort -uf); do
 	if shouldBeIncluded ${CONTRIBUTOR}; then
 		CONTRIBUTORS+=("${CONTRIBUTOR}")
 	fi
@@ -59,8 +56,7 @@ if [ ${#CONTRIBUTORS[@]} -ne 0 ]; then
 # This file is auto generated, using git to list all individuals contributors.
 # see `.github/generate-authors.sh` for the scripting
 EOH
-    for i in "${CONTRIBUTORS[@]}"
-    do
+    for i in "${CONTRIBUTORS[@]}"; do
 	    echo "$i" >> ${AUTHORS_PATH}
     done
     exit 0
