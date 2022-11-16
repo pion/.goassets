@@ -18,24 +18,24 @@ then
   . ${SCRIPT_PATH}/.ci.conf
 fi
 
-files=$(
-  find "$SCRIPT_PATH/.." -name "*.go" \
-    | while read file
+FILES=$(
+  find "${SCRIPT_PATH}/.." -name "*.go" \
+    | while read FILE
     do
-      excluded=false
-      for ex in $EXCLUDE_DIRECTORIES
+      EXCLUDED=false
+      for EXCLUDE_DIRECTORY in ${EXCLUDE_DIRECTORIES}
       do
-        if [[ $file == */$ex/* ]]
+        if [[ $file == */${EXCLUDE_DIRECTORY}/* ]]
         then
-          excluded=true
+          EXCLUDED=true
           break
         fi
       done
-      $excluded || echo "$file"
+      ${EXCLUDED} || echo "${FILE}"
     done
 )
 
-if grep -E '\.(Trace|Debug|Info|Warn|Error)f?\("[^"]*\\n"\)?' $files | grep -v -e 'nolint'; then
+if grep -E '\.(Trace|Debug|Info|Warn|Error)f?\("[^"]*\\n"\)?' ${FILES} | grep -v -e 'nolint'; then
 	echo "Log format strings should have trailing new-line"
 	exit 1
 fi
