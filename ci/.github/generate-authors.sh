@@ -12,7 +12,7 @@
 set -e
 
 SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-AUTHORS_PATH="$GITHUB_WORKSPACE/AUTHORS.txt"
+AUTHORS_PATH="${GITHUB_WORKSPACE}/AUTHORS.txt"
 
 if [ -f ${SCRIPT_PATH}/.ci.conf ]
 then
@@ -42,16 +42,16 @@ shouldBeIncluded () {
 
 
 IFS=$'\n' #Only split on newline
-for contributor in $(git log --format='%aN <%aE>' | LC_ALL=C.UTF-8 sort -uf)
+for CONTRIBUTOR in $(git log --format='%aN <%aE>' | LC_ALL=C.UTF-8 sort -uf)
 do
-	if shouldBeIncluded $contributor; then
-		CONTRIBUTORS+=("$contributor")
+	if shouldBeIncluded ${CONTRIBUTOR}; then
+		CONTRIBUTORS+=("${CONTRIBUTOR}")
 	fi
 done
 unset IFS
 
 if [ ${#CONTRIBUTORS[@]} -ne 0 ]; then
-	cat >$AUTHORS_PATH <<-'EOH'
+	cat >${AUTHORS_PATH} <<-'EOH'
 # Thank you to everyone that made Pion possible. If you are interested in contributing
 # we would love to have you https://github.com/pion/webrtc/wiki/Contributing
 #
@@ -60,7 +60,7 @@ if [ ${#CONTRIBUTORS[@]} -ne 0 ]; then
 EOH
     for i in "${CONTRIBUTORS[@]}"
     do
-	    echo "$i" >> $AUTHORS_PATH
+	    echo "$i" >> ${AUTHORS_PATH}
     done
     exit 0
 fi
