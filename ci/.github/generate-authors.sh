@@ -12,7 +12,8 @@
 set -e
 
 SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-AUTHORS_PATH="${GITHUB_WORKSPACE}/AUTHORS.txt"
+GIT_WORKDIR=${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}
+AUTHORS_PATH="${GIT_WORKDIR}/AUTHORS.txt"
 
 if [ -f ${SCRIPT_PATH}/.ci.conf ]
 then
