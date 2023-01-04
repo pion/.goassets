@@ -79,7 +79,7 @@ jobs:
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           if [ -n "${TEST_HOOK}" ]; then ${TEST_HOOK}; fi
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           name: codecov-umbrella
           fail_ci_if_error: true
@@ -167,7 +167,7 @@ jobs:
             -exec="${GO_JS_WASM_EXEC}" \
             -v ./...
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           name: codecov-umbrella
           fail_ci_if_error: true
