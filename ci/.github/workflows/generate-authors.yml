@@ -13,14 +13,13 @@ name: generate-authors
 
 on:
   pull_request:
-    branches-ignore:
-      - 'renovate/*'
 
 jobs:
   checksecret:
     permissions:
       contents: none
     runs-on: ubuntu-latest
+    if: startsWith(github.event.pull_request.head.ref, 'renovate/') == false
     outputs:
       is_PIONBOT_PRIVATE_KEY_set: ${{ steps.checksecret_job.outputs.is_PIONBOT_PRIVATE_KEY_set }}
     steps:
