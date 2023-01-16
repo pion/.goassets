@@ -12,7 +12,10 @@
 set -e
 
 # Disallow usages of functions that cause the program to exit in the library code
-SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+SCRIPT_PATH=$(
+  cd "$(dirname "${BASH_SOURCE[0]}")"
+  pwd -P
+)
 if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
   . ${SCRIPT_PATH}/.ci.conf
 fi
@@ -32,6 +35,6 @@ FILES=$(
 )
 
 if grep -E '\.(Trace|Debug|Info|Warn|Error)f?\("[^"]*\\n"\)?' ${FILES} | grep -v -e 'nolint'; then
-	echo "Log format strings should have trailing new-line"
-	exit 1
+  echo "Log format strings should have trailing new-line"
+  exit 1
 fi

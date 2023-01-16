@@ -12,7 +12,10 @@
 set -e
 
 # Disallow usages of functions that cause the program to exit in the library code
-SCRIPT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+SCRIPT_PATH=$(
+  cd "$(dirname "${BASH_SOURCE[0]}")"
+  pwd -P
+)
 if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
   . ${SCRIPT_PATH}/.ci.conf
 fi
@@ -36,8 +39,8 @@ FILES=$(
 )
 
 for DISALLOWED_FUNCTION in "${DISALLOWED_FUNCTIONS[@]}"; do
-	if grep -e "\s${DISALLOWED_FUNCTION}" ${FILES} | grep -v -e 'nolint'; then
-		echo "${DISALLOWED_FUNCTION} may only be used in example code"
-		exit 1
-	fi
+  if grep -e "\s${DISALLOWED_FUNCTION}" ${FILES} | grep -v -e 'nolint'; then
+    echo "${DISALLOWED_FUNCTION} may only be used in example code"
+    exit 1
+  fi
 done

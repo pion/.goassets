@@ -15,6 +15,15 @@ Feel free to commit sample data to ci-sandbox repository to test the changes.
 When it is ready to sync to the all repositories, add a version tag to this repository.
 GitHub Action will open pull-requests on the target repositories to sync the changes.
 
+### Shell script format
+
+- Formatter: https://github.com/mvdan/sh#shfmt
+- Style guide: https://google.github.io/styleguide/shell.xml
+
+```shell
+shfmt -i 2 -ci -bn -l -w .
+```
+
 ### Contributing
 
 Check out the **[contributing wiki](https://github.com/pion/webrtc/wiki/Contributing)** to join the group of amazing people making this project possible:
