@@ -13,10 +13,10 @@ name: Test
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 permissions:
   contents: read
@@ -39,8 +39,7 @@ jobs:
             ~/go/bin
             ~/.cache
           key: ${{ runner.os }}-amd64-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-amd64-go-
+          restore-keys: ${{ runner.os }}-amd64-go-
 
       - name: Setup Go
         uses: actions/setup-go@v3
@@ -101,8 +100,7 @@ jobs:
             ~/go/pkg/mod
             ~/.cache
           key: ${{ runner.os }}-i386-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-i386-go-
+          restore-keys: ${{ runner.os }}-i386-go-
 
       - name: Run test
         run: |
@@ -139,8 +137,7 @@ jobs:
             ~/go/pkg/mod
             ~/.cache
           key: ${{ runner.os }}-wasm-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-wasm-go-
+          restore-keys: ${{ runner.os }}-wasm-go-
 
       - name: Download Go
         run: curl -sSfL https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar -C ~ -xzf -
