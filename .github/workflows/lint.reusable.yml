@@ -1,0 +1,57 @@
+name: Lint
+on:
+  workflow_call:
+    inputs:
+      goassets-ref:
+        default: master
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  lint-commit-message:
+    name: Metadata
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Checkout .goassets
+        uses: actions/checkout@v3
+        with:
+          repository: pion/.goassets
+          path: ${{ github.workspace }}/.github/.goassets
+          ref: ${{ inputs.goassets-ref }}
+
+      - name: Commit Message
+        run: .github/.goassets/scripts/lint-commit-message.sh
+
+      - name: File names
+        run: .github/.goassets/scripts/lint-filename.sh
+
+      - name: Functions
+        run: .github/.goassets/scripts/lint-disallowed-functions-in-library.sh
+
+      - name: Logging messages should not have trailing newlines
+        run: .github/.goassets/scripts/lint-no-trailing-newline-in-log-messages.sh
+
+  lint-go:
+    name: Go
+    permissions:
+      contents: read
+      pull-requests: read
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.45.2
+          args: $GOLANGCI_LINT_EXRA_ARGS

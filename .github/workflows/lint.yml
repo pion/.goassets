@@ -1,19 +1,18 @@
 name: Lint
 on:
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
+
 jobs:
   commit-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: copy scripts
-        run: cp ci/.github/*.sh .github/
-      - name: lint commit message
-        run: .github/lint-commit-message.sh
+      - name: Copy scripts
+        run: |
+          mkdir -p .github/.goassets/
+          cp -r scripts/lint-commit-message.sh .github/.goassets/
+      - name: Lint commit message
+        run: .github/.goassets/lint-commit-message.sh

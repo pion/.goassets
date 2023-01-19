@@ -1,0 +1,69 @@
+name: Test
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Go ${{ inputs.go-version }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/go/bin
+            ~/.cache
+          key: ${{ runner.os }}-amd64-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-amd64-go-
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ inputs.go-version }}
+
+      - name: Setup go-acc
+        run: go install github.com/ory/go-acc@latest
+
+      - name: Set up gotestfmt
+        uses: haveyoudebuggedit/gotestfmt-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
+
+      - name: Run test
+        run: |
+          TEST_BENCH_OPTION="-bench=."
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+
+          set -euo pipefail
+          go-acc -o cover.out ./... -- \
+            ${TEST_BENCH_OPTION} \
+            -json \
+            -v -race 2>&1 | grep -v '^go: downloading' | tee /tmp/gotest.log | gotestfmt
+
+      - name: Upload test log
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-log-${{ inputs.go-version }}
+          path: /tmp/gotest.log
+          if-no-files-found: error
+
+      - name: Run TEST_HOOK
+        run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${TEST_HOOK}" ]; then ${TEST_HOOK}; fi
+
+      - uses: codecov/codecov-action@v3
+        with:
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          flags: go
