@@ -7,7 +7,7 @@ SCRIPT_PATH=$(
   pwd -P
 )
 if [ -z "${AUTHORS_PATH}" ]; then
-  AUTHORS_PATH="$GITHUB_WORKSPACE/AUTHORS.txt"
+  AUTHORS_PATH="$(git rev-parse --show-toplevel)/AUTHORS.txt"
 fi
 
 if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
