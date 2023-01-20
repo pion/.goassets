@@ -17,5 +17,5 @@ on:
 jobs:
   generate:
     uses: pion/.goassets/.github/workflows/generate-authors.reusable.yml@master
-    with:
+    secrets:
       token: ${{ secrets.PIONBOT_PRIVATE_KEY }}
