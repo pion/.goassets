@@ -2,13 +2,14 @@ name: Generate Authors
 
 on:
   workflow_call:
-    secrets:
-      token:
-        required: true
+    inputs:
       goassets-ref:
         default: master
         required: false
         type: string
+    secrets:
+      token:
+        required: true
 
 jobs:
   check-secret:
