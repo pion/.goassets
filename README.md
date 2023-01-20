@@ -21,7 +21,7 @@ GitHub Action will open pull-requests on the target repositories to sync the cha
 - Style guide: https://google.github.io/styleguide/shell.xml
 
 ```shell
-shfmt -i 2 -ci -bn -l -w .
+shfmt -i 2 -ci -bn -l  -w .
 ```
 
 ### Contributing
