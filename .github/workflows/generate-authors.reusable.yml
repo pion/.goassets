@@ -26,7 +26,7 @@ jobs:
           TOKEN: ${{ secrets.token }}
         run: |
           echo "is_token_set: ${{ env.TOKEN != '' }}"
-          echo "::set-output name=is_token_set::${{ env.TOKEN != '' }}"
+          echo "is_token_set=${{ env.TOKEN != '' }}" >> ${GITHUB_OUTPUT}
 
   generate-authors:
     name: Generate Authors
@@ -61,15 +61,15 @@ jobs:
           COMMIT_MSG="${COMMIT_MSG//'%'/'%25'}"
           COMMIT_MSG="${COMMIT_MSG//$'\n'/'%0A'}"
           COMMIT_MSG="${COMMIT_MSG//$'\r'/'%0D'}"
-          echo "::set-output name=msg::$COMMIT_MSG"
+          echo "msg=$COMMIT_MSG" >> ${GITHUB_OUTPUT}
 
       - name: Get last commit author
         id: last-commit-author
-        run: echo "::set-output name=msg::$(git log -1 --pretty='%aN <%ae>')"
+        run: echo "msg=$(git log -1 --pretty='%aN <%ae>')" >> ${GITHUB_OUTPUT}
 
       - name: Check if AUTHORS.txt file has changed
         id: git-status-output
-        run: echo "::set-output name=msg::$(git status -s | wc -l)"
+        run: echo "msg=$(git status -s | wc -l)" >> ${GITHUB_OUTPUT}
 
       - name: Commit and push
         if: ${{ steps.git-status-output.outputs.msg != '0' }}
