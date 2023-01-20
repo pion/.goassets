@@ -4,7 +4,7 @@ on:
     inputs:
       goassets-ref:
         default: master
-        required: true
+        required: false
         type: string
 
 permissions:
