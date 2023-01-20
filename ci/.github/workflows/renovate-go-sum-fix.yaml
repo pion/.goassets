@@ -17,7 +17,6 @@ on:
 
 jobs:
   fix:
-    runs-on: ubuntu-latest
     uses: pion/.goassets/.github/workflows/renovate-go-sum-fix.reusable.yml@master
     with:
       token: ${{ secrets.PIONBOT_PRIVATE_KEY }}

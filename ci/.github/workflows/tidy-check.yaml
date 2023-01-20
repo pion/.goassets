@@ -18,7 +18,6 @@ on:
 
 jobs:
   tidy:
-    runs-on: ubuntu-latest
     uses: pion/.goassets/.github/workflows/tidy-check.reusable.yml@master
     with:
       go-version: '1.19' # auto-update/latest-go-version
