@@ -1,0 +1,47 @@
+name: Generate Authors
+
+on:
+  pull_request:
+
+jobs:
+  generate-authors:
+    name: Generate Authors
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Generate the authors file
+        run: scripts/generate-authors.sh
+
+      - name: Add the authors file to git
+        run: git add AUTHORS.txt
+
+      - name: Get last commit message
+        id: last-commit-message
+        run: |
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          COMMIT_MSG="${COMMIT_MSG//'%'/'%25'}"
+          COMMIT_MSG="${COMMIT_MSG//$'\n'/'%0A'}"
+          COMMIT_MSG="${COMMIT_MSG//$'\r'/'%0D'}"
+          echo "msg=$COMMIT_MSG" >> ${GITHUB_OUTPUT}
+
+      - name: Get last commit author
+        id: last-commit-author
+        run: echo "msg=$(git log -1 --pretty='%aN <%ae>')" >> ${GITHUB_OUTPUT}
+
+      - name: Check if AUTHORS.txt file has changed
+        id: git-status-output
+        run: echo "msg=$(git status -s | wc -l)" >> ${GITHUB_OUTPUT}
+
+      - name: Commit and push
+        if: ${{ steps.git-status-output.outputs.msg != '0' }}
+        run: |
+          git config user.email $(echo "${{ steps.last-commit-author.outputs.msg }}" | sed 's/\(.\+\) <\(\S\+\)>/\2/')
+          git config user.name $(echo "${{ steps.last-commit-author.outputs.msg }}" | sed 's/\(.\+\) <\(\S\+\)>/\1/')
+          git add AUTHORS.txt
+          git commit --amend --no-edit
+          git push --force https://github.com/${GITHUB_REPOSITORY} $(git symbolic-ref -q --short HEAD)
