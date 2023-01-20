@@ -39,8 +39,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
-        fetch-depth: 0
-        token: ${{ secrets.token }}
+          fetch-depth: 0
+          token: ${{ secrets.token }}
       - name: Checkout .goassets
         uses: actions/checkout@v3
         with:
