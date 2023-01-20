@@ -50,7 +50,7 @@ if [ ${#CONTRIBUTORS[@]} -ne 0 ]; then
 # we would love to have you https://github.com/pion/webrtc/wiki/Contributing
 #
 # This file is auto generated, using git to list all individuals contributors.
-# see $(.github/generate-authors.sh) for the scripting
+# see https://github.com/pion/.goassets/blob/master/scripts/generate-authors.sh for the scripting
 EOH
   for i in "${CONTRIBUTORS[@]}"; do
     echo "$i" >>${AUTHORS_PATH}
