@@ -33,7 +33,7 @@ jobs:
             pion/webrtc
           root_dir: ci
           rm: |
-            .github/hooks
+            .github/hooks/*
             .github/workflows/renovate-go-mod-fix.yaml
             .github/generate-authors.sh
             .github/lint-*.sh
