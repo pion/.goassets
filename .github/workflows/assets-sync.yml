@@ -51,6 +51,11 @@ jobs:
           repos: |
             pion/stun
           root_dir: ci
+          rm: |
+            .github/hooks/*
+            .github/workflows/renovate-go-mod-fix.yaml
+            .github/generate-authors.sh
+            .github/lint-*.sh
           exclude_paths: |
             codecov.yml
           git_user: Pion Bot
