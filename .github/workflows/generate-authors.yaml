@@ -1,0 +1,10 @@
+name: Generate Authors
+
+on:
+  pull_request:
+
+jobs:
+  generate:
+    uses: pion/.goassets/.github/workflows/generate-authors.reusable.yml@master
+    secrets:
+      token: ${{ secrets.PIONBOT_PRIVATE_KEY }}
