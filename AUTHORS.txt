@@ -1,0 +1,20 @@
+# Thank you to everyone that made Pion possible. If you are interested in contributing
+# we would love to have you https://github.com/pion/webrtc/wiki/Contributing
+#
+# This file is auto generated, using git to list all individuals contributors.
+# see https://github.com/pion/.goassets/blob/master/scripts/generate-authors.sh for the scripting
+Adam Kiss <masterada@gmail.com>
+Atsushi Watanabe <atsushi.w@ieee.org>
+Aurken Bilbao <aurken@pm.me>
+Benny Daon <benny@tuzig.com>
+Daniele Sluijters <daenney@users.noreply.github.com>
+David Zhao <david@davidzhao.com>
+Luke S <luke@street.dev>
+Michiel De Backker <mail@backkem.me>
+Sean DuBois <duboisea@justin.tv>
+Sean DuBois <duboisea@twitch.tv>
+Sean DuBois <sean@siobud.com>
+Steffen Vogel <post@steffenvogel.de>
+Tarrence van As <tarrencev@users.noreply.github.com>
+tarrencev <tarrence13@gmail.com>
+ZHENK <chengzhenyang@gmail.com>
