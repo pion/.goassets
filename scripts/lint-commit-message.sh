@@ -3,10 +3,18 @@
 set -e
 
 display_commit_message_error() {
-  cat <<EndOfMessage
+  if [ -n "${CI}" ]; then
+    echo "::error title=Commit message check failed::$2"
+    echo -e "::group::Commit message\n$1\n::endgroup::"
+  else
+    cat <<EndOfMessage
 $1
 
 -------------------------------------------------
+EndOfMessage
+  fi
+
+  cat <<EndOfMessage
 The preceding commit message is invalid
 it failed '$2' of the following checks
 
