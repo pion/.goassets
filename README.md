@@ -29,7 +29,6 @@ shfmt -i 2 -ci -bn -l -w .
 Check out the [contributing wiki](https://github.com/pion/webrtc/wiki/Contributing) to join the group of amazing people making this project possible:
 
 - See [AUTHORS.txt](AUTHORS.txt)
-- [Max Hawkins](https://github.com/maxhawkins) - _Git hooks_
 
 ### License
 

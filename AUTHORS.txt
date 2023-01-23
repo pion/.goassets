@@ -18,3 +18,6 @@ Steffen Vogel <post@steffenvogel.de>
 Tarrence van As <tarrencev@users.noreply.github.com>
 tarrencev <tarrence13@gmail.com>
 ZHENK <chengzhenyang@gmail.com>
+
+# List of contributors not appearing in git history
+Max Hawkins https://github.com/maxhawkins
