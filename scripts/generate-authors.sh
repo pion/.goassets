@@ -14,15 +14,15 @@ if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
   . ${SCRIPT_PATH}/.ci.conf
 fi
 
-EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot' 'pionbot')
 # If you want to exclude a name from all repositories, send a PR to
 # https://github.com/pion/.goassets.
 # If you want to exclude a name only from this repository,
 # add EXCLUDED_CONTRIBUTORS=('name') to .github/.ci.conf
+EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion Bot' 'pionbot')
 
 EXTRA_CONTRIBUTORS="$(
   (
-    sed -n '/^# List of contributors not appearing in git history/{n; :l; /.\+/p; n; b l}' ${AUTHORS_PATH} 2>/dev/null \
+    sed -n '/^# List of contributors not appearing in Git history/{n; :l; /.\+/p; n; b l}' ${AUTHORS_PATH} 2>/dev/null \
       || true
   ) | sort | uniq
 )"
@@ -64,7 +64,7 @@ EOH
   done
   cat <<EOH >>${AUTHORS_PATH}
 
-# List of contributors not appearing in git history
+# List of contributors not appearing in Git history
 ${EXTRA_CONTRIBUTORS}
 EOH
   exit 0
