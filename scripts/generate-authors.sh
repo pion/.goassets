@@ -20,6 +20,13 @@ EXCLUDED_CONTRIBUTORS+=('John R. Bradley' 'renovate[bot]' 'Renovate Bot' 'Pion B
 # If you want to exclude a name only from this repository,
 # add EXCLUDED_CONTRIBUTORS=('name') to .github/.ci.conf
 
+EXTRA_CONTRIBUTORS="$(
+  (
+    sed -n '/^# List of contributors not appearing in git history/{n; :l; /.\+/p; n; b l}' ${AUTHORS_PATH} 2>/dev/null \
+      || true
+  ) | sort | uniq
+)"
+
 CONTRIBUTORS=()
 
 shouldBeIncluded() {
@@ -44,7 +51,7 @@ for CONTRIBUTOR in $(
 done
 unset IFS
 
-if [ ${#CONTRIBUTORS[@]} -ne 0 ]; then
+if [ ${#CONTRIBUTORS[@]} -ne 0 ] || [ -n ${EXTRA_CONTRIBUTORS} ]; then
   cat <<EOH >${AUTHORS_PATH}
 # Thank you to everyone that made Pion possible. If you are interested in contributing
 # we would love to have you https://github.com/pion/webrtc/wiki/Contributing
@@ -55,5 +62,10 @@ EOH
   for i in "${CONTRIBUTORS[@]}"; do
     echo "$i" >>${AUTHORS_PATH}
   done
+  cat <<EOH >>${AUTHORS_PATH}
+
+# List of contributors not appearing in git history
+${EXTRA_CONTRIBUTORS}
+EOH
   exit 0
 fi
