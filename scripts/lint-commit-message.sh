@@ -34,7 +34,12 @@ lint_commit_message() {
   fi
 
   if [[ "$(echo "$1" | head -n1 | awk '{print length}')" -gt 50 ]]; then
-    display_commit_message_error "$1" 'Limit the subject line to 50 characters'
+    re='^Update module github.com/[0-9a-zA-Z./]+ to v[0-9]+\.[0-9]+\.[0-9]+$'
+    if [[ "$(echo "$1" | head -n1)" =~ $re ]]; then
+      echo "Ignored subject line length error for module update commit"
+    else
+      display_commit_message_error "$1" 'Limit the subject line to 50 characters'
+    fi
   fi
 
   if [[ ! $1 =~ ^[A-Z] ]]; then
