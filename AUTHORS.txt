@@ -4,6 +4,7 @@
 # This file is auto generated, using git to list all individuals contributors.
 # see https://github.com/pion/.goassets/blob/master/scripts/generate-authors.sh for the scripting
 Adam Kiss <masterada@gmail.com>
+Artur Shellunts <shellunts.artur@gmail.com>
 Atsushi Watanabe <atsushi.w@ieee.org>
 Aurken Bilbao <aurken@pm.me>
 Benny Daon <benny@tuzig.com>
