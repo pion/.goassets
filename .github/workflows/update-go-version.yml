@@ -33,7 +33,7 @@ jobs:
           then
             echo -e "machine github.com\nlogin ${{ secrets.PIONBOT_PRIVATE_KEY }}" > ~/.netrc
             git add ./ci/.github/workflows
-            git commit --amend --no-edit
-            git push origin -f ${GITHUB_REF#refs/heads/}
+            git commit -m "Update CI matrix"
+            git push origin ${GITHUB_REF#refs/heads/}
             rm ~/.netrc
           fi
