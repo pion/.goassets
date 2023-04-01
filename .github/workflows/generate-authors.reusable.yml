@@ -1,4 +1,4 @@
-name: Generate Authors
+name: Generate Authors (reusable)
 
 on:
   workflow_call:
