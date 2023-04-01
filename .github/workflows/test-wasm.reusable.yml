@@ -1,4 +1,4 @@
-name: Test WASM
+name: Test WASM (reusable)
 on:
   workflow_call:
     inputs:

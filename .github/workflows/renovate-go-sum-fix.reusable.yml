@@ -1,4 +1,4 @@
-name: Fix go.sum
+name: Fix go.sum (reusable)
 on:
   workflow_call:
     secrets:

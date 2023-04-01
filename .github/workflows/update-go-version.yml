@@ -1,4 +1,4 @@
-name: update-go-version
+name: Update Go version
 on:
   push:
     branches:
