@@ -14,6 +14,7 @@ jobs:
         with:
           repos: |
             pion/datachannel
+            pion/dcnet
             pion/dtls
             pion/ice
             pion/interceptor
@@ -21,16 +22,20 @@ jobs:
             pion/mdns
             pion/opus
             pion/peerconnection_explainer
+            pion/portmap
             pion/randutil
             pion/rtcp
             pion/rtp
+            pion/rtpio
             pion/sctp
             pion/sdp
             pion/srtp
+            pion/template
             pion/transport
             pion/turn
             pion/udp
             pion/webrtc
+            pion/stun
           root_dir: ci
           rm: |
             .github/hooks/*
@@ -45,24 +50,3 @@ jobs:
             Update CI configs to %v
 
             Update lint scripts and CI configs.
-      - name: sync CI configs
-        uses: at-wat/assets-sync-action@v0
-        with:
-          repos: |
-            pion/stun
-          root_dir: ci
-          rm: |
-            .github/hooks/*
-            .github/workflows/renovate-go-mod-fix.yaml
-            .github/generate-authors.sh
-            .github/lint-*.sh
-          exclude_paths: |
-            codecov.yml
-          git_user: Pion Bot
-          git_email: 59523206+pionbot@users.noreply.github.com
-          github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
-          commit_message: |
-            Update CI configs to %v
-
-            Update lint scripts and CI configs.
-            Excluding codecov.yml.
