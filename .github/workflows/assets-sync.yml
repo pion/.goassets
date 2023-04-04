@@ -1,4 +1,4 @@
-name: assets-sync
+name: Sync Assets
 on:
   push:
     tags:
