@@ -1,4 +1,4 @@
-name: Test i386
+name: Test i386 (reusable)
 on:
   workflow_call:
     inputs:
