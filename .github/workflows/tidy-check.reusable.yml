@@ -1,4 +1,4 @@
-name: Go mod tidy
+name: Go mod tidy (reusable)
 on:
   workflow_call:
     inputs:
