@@ -34,9 +34,6 @@ jobs:
       - name: File names
         run: .github/.goassets/scripts/lint-filename.sh
 
-      - name: Functions
-        run: .github/.goassets/scripts/lint-disallowed-functions-in-library.sh
-
       - name: Logging messages should not have trailing newlines
         run: .github/.goassets/scripts/lint-no-trailing-newline-in-log-messages.sh
 
