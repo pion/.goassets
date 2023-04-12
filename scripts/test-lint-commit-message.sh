@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+# SPDX-License-Identifier: MIT
 
 # This is a test for lint-commit-message.sh script
 # This script is not intended for linting commit messages
