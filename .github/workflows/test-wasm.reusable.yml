@@ -43,7 +43,7 @@ jobs:
       - name: Set Go Path
         run: echo "GO_JS_WASM_EXEC=${GOROOT}/misc/wasm/go_js_wasm_exec" >> $GITHUB_ENV
 
-      - name: Insall NPM modules
+      - name: Install NPM modules
         run: yarn install
 
       - name: Run Tests
