@@ -17,8 +17,6 @@ jobs:
   lint-commit-message:
     name: Metadata
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - uses: actions/checkout@v3
         with:
@@ -48,8 +46,6 @@ jobs:
       contents: read
       pull-requests: read
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
     steps:
       - uses: actions/checkout@v3
 
