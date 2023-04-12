@@ -32,7 +32,6 @@ jobs:
             pion/template
             pion/transport
             pion/turn
-            pion/udp
             pion/webrtc
             pion/stun
           root_dir: ci
