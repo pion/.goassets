@@ -52,8 +52,10 @@ jobs:
       - name: Run Tests
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
-          GOOS=js GOARCH=wasm $GOPATH/bin/go test \
-            -coverprofile=cover.out -covermode=atomic \
+          GOOS=js GOARCH=wasm \
+          ${GOPATH}/bin/go test \
+            -coverprofile=cover.out \
+            -covermode=atomic \
             -exec="${GO_JS_WASM_EXEC}" \
             -v ./...
 

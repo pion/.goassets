@@ -41,16 +41,26 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
 
+      - name: Run pre test hook
+        run: |
+          if [ -f .github/.ci.conf ]; && . .github/.ci.conf
+          [ -n "${PRE_TEST_HOOK}" ] && ${PRE_TEST_HOOK}
+
       - name: Run test
         run: |
           TEST_BENCH_OPTION="-bench=."
-          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          [ -f .github/.ci.conf ] && . .github/.ci.conf
 
           set -euo pipefail
           go-acc -o cover.out ./... -- \
             ${TEST_BENCH_OPTION} \
             -json \
             -v -race 2>&1 | grep -v '^go: downloading' | tee /tmp/gotest.log | gotestfmt
+
+      - name: Run post test hook
+        run: |
+          [ -f .github/.ci.conf ] && . .github/.ci.conf
+          [ -n "${POST_TEST_HOOK}" ] && ${POST_TEST_HOOK}
 
       - name: Upload test log
         uses: actions/upload-artifact@v3
@@ -59,11 +69,6 @@ jobs:
           name: test-log-${{ inputs.go-version }}
           path: /tmp/gotest.log
           if-no-files-found: error
-
-      - name: Run TEST_HOOK
-        run: |
-          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
-          if [ -n "${TEST_HOOK}" ]; then ${TEST_HOOK}; fi
 
       - uses: codecov/codecov-action@v3
         with:
