@@ -1,11 +1,14 @@
 # SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
 # SPDX-License-Identifier: MIT
 
-name: Test
+name: Test (reusable)
 on:
   workflow_call:
     inputs:
       go-version:
+        required: true
+        type: string
+      arch:
         required: true
         type: string
 
@@ -15,7 +18,8 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: Go ${{ inputs.go-version }}
+    name: Go v${{ inputs.go-version }} on linux/${{ inputs.arch }}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -25,49 +29,77 @@ jobs:
             ~/go/pkg/mod
             ~/go/bin
             ~/.cache
-          key: ${{ runner.os }}-amd64-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-amd64-go-
+          key: ${{ runner.os }}-${{ inputs.arch }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-${{ inputs.arch }}-go-
 
       - name: Setup Go
         uses: actions/setup-go@v4
         with:
           go-version: ${{ inputs.go-version }}
 
-      - name: Setup go-acc
-        run: go install github.com/ory/go-acc@latest
-
-      - name: Set up gotestfmt
-        uses: haveyoudebuggedit/gotestfmt-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
-
-      - name: Run pre test hook
-        run: |
-          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
-          if [ -n "${PRE_TEST_HOOK}" ]; then ${PRE_TEST_HOOK}; fi
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v2.1.0
+        if: inputs.arch != 'amd64'
 
       - name: Run test
-        run: |
-          TEST_BENCH_OPTION="-bench=."
-          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+        env:
+          CGO_ENABLED: "1"
+          TEST_BENCH_OPTION: -bench=.
+          TEST_FLAGS: ""
+        run: |2
+          docker run \
+            --platform linux/${{ inputs.arch }} \
+            --env CGO_ENABLED \
+            --env TEST_BENCH_OPTION \
+            --workdir ${{ github.workspace }} \
+            --volume /home/runner:/home/runner \
+            --interactive \
+            golang:${{ inputs.go-version }}-buster \
+            bash -s <<'EOF'
+              set -eo pipefail
 
-          set -euo pipefail
-          go-acc -o cover.out ./... -- \
-            ${TEST_BENCH_OPTION} \
-            -json \
-            -v -race 2>&1 | grep -v '^go: downloading' | tee /tmp/gotest.log | gotestfmt
+              if [ "${{ inputs.arch }}" == "amd64" ]; then
+                TEST_FLAGS=-race
+              fi
 
-      - name: Run post test hook
-        run: |
-          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
-          if [ -n "${POST_TEST_HOOK}" ]; then ${POST_TEST_HOOK}; fi
+              if [ -f .github/.ci.conf ]; then
+                . .github/.ci.conf
+              fi
+
+              echo ::group::Install dependencies
+              go install github.com/ory/go-acc@latest
+              go install github.com/gotesttools/gotestfmt/v2/cmd/gotestfmt@latest
+              echo ::endgroup::
+              
+              if [ -n "${PRE_TEST_HOOK}" ]; then
+                echo ::group::Run pre test hook
+                ${PRE_TEST_HOOK}
+                echo ::endgroup::
+              fi
+
+              echo ::group::Run test
+              go-acc -o cover.out ./... -- \
+                ${TEST_FLAGS} ${TEST_BENCH_OPTION} \
+                -json \
+                -v 2>&1 | \
+              grep -v '^go: downloading' | \
+              tee  test.log | \
+              gotestfmt
+              echo ::endgroup::
+
+              if [ -n "${POST_TEST_HOOK}" ]; then
+                echo ::group::Run post test hook
+                ${POST_TEST_HOOK}
+                echo ::endgroup::
+              fi
+          EOF
 
       - name: Upload test log
         uses: actions/upload-artifact@v3
         if: always()
         with:
           name: test-log-${{ inputs.go-version }}
-          path: /tmp/gotest.log
+          path: test.log
           if-no-files-found: error
 
       - uses: codecov/codecov-action@v3
