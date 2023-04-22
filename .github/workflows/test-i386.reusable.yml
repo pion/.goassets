@@ -31,6 +31,7 @@ jobs:
         run: |
           mkdir -p $HOME/go/pkg/mod $HOME/.cache
           docker run \
+            --platform linux/i386
             --user $(id -u):$(id -g) \
             --env "GO111MODULE=on" \
             --env "CGO_ENABLED=0" \
@@ -38,7 +39,7 @@ jobs:
             --volume ${HOME}/go/pkg/mod:/go/pkg/mod \
             --volume ${HOME}/.cache:/.cache \
             --workdir /go/src/github.com/pion/$(basename ${GITHUB_WORKSPACE}) \
-            i386/golang:${{inputs.go-version}}-alpine \
+            golang:${{inputs.go-version}}-alpine \
             /usr/local/go/bin/go test \
               ${TEST_EXTRA_ARGS:-} \
               -v ./...
