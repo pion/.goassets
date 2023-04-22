@@ -43,13 +43,13 @@ jobs:
 
       - name: Run pre test hook
         run: |
-          if [ -f .github/.ci.conf ]; && . .github/.ci.conf
-          [ -n "${PRE_TEST_HOOK}" ] && ${PRE_TEST_HOOK}
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${PRE_TEST_HOOK}" ]; then ${PRE_TEST_HOOK}; fi
 
       - name: Run test
         run: |
           TEST_BENCH_OPTION="-bench=."
-          [ -f .github/.ci.conf ] && . .github/.ci.conf
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
 
           set -euo pipefail
           go-acc -o cover.out ./... -- \
@@ -59,8 +59,8 @@ jobs:
 
       - name: Run post test hook
         run: |
-          [ -f .github/.ci.conf ] && . .github/.ci.conf
-          [ -n "${POST_TEST_HOOK}" ] && ${POST_TEST_HOOK}
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${POST_TEST_HOOK}" ]; then ${POST_TEST_HOOK}; fi
 
       - name: Upload test log
         uses: actions/upload-artifact@v3
