@@ -4,7 +4,6 @@
 
 set -e
 
-# Disallow usages of functions that cause the program to exit in the library code
 SCRIPT_PATH=$(
   cd "$(dirname "${BASH_SOURCE[0]}")"
   pwd -P
