@@ -36,10 +36,13 @@ jobs:
       - name: Setup go-acc
         run: go install github.com/ory/go-acc@latest
 
-      - name: Set up gotestfmt
+      - name: Setup gotestfmt
         uses: haveyoudebuggedit/gotestfmt-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
+
+      - name: Check API compatability
+        uses: joelanford/go-apidiff@v0.6.0
 
       - name: Run pre test hook
         run: |
