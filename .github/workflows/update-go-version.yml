@@ -25,9 +25,12 @@ jobs:
           go_minor_prev=$((${go_minor} - 1))
           go_version_prev=${go_major}.${go_minor_prev}
 
+          scripts="$(find ./scipts -name "*.sh")"
           workflows="$(find ./ci/.github/workflows -name "*.yaml" -o -name "*.yml")"
-          sed "s|\[.*\]\( # auto-update/supported-go-version-list\)|['${go_version}', '${go_version_prev}']\1|" -i ${workflows}
-          sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/latest-go-version\)|'${go_version}'\1|" -i ${workflows}
+
+          sed "s|\[.*\]\( # auto-update/supported-go-version-list\)|[\"${go_version}\", \"${go_version_prev}\"]\1|" -i ${workflows}
+          sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/latest-go-version\)|\"${go_version}\"\1|" -i ${workflows} ${scripts}
+          sed "s|['\"]\?[0-9.]*['\"]\?\( # auto-update/prev-go-version\)|\"${go_version_prev}\"\1|" -i ${workflows} ${scripts}
       - name: Commit changes
         run: |
           git config --global user.name "Pion Bot"
