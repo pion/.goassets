@@ -58,6 +58,12 @@ jobs:
             bash -s <<'EOF'
               set -eo pipefail
 
+              echo ::group::Environment
+              echo "System: $(uname -a)"
+              echo "Environment variables:"
+              env
+              echo ::endgroup::
+
               if [ "${{ inputs.arch }}" == "amd64" ]; then
                 TEST_FLAGS=-race
               fi
