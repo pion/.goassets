@@ -78,13 +78,13 @@ jobs:
               echo ::endgroup::
               
               if [ -n "${PRE_TEST_HOOK}" ]; then
-                echo ::group::Run pre test hook
-                ${PRE_TEST_HOOK}
-                echo ::endgroup::
-              fi
-
-              echo ::group::Run test
               go-acc -o cover.out ./... -- \
+                  ${TEST_FLAGS} ${TEST_BENCH_OPTION} \
+                  -json \
+                  -v 2>&1 \
+                | grep -v '^go: downloading' \
+                | tee  test.log \
+                | gotestfmt
                 ${TEST_FLAGS} ${TEST_BENCH_OPTION} \
                 -json \
                 -v 2>&1 | \
