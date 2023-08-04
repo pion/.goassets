@@ -31,12 +31,13 @@ jobs:
             pion/rtpio
             pion/sctp
             pion/sdp
+            pion/simulnet
             pion/srtp
+            pion/stun
             pion/template
             pion/transport
             pion/turn
             pion/webrtc
-            pion/stun
           root_dir: ci
           rm: |
             .github/hooks/*
