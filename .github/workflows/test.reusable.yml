@@ -36,6 +36,7 @@ jobs:
           go-version: ${{ inputs.go-version }}
 
       - name: Check API compatability
+        if: github.ref != 'refs/heads/master'
         uses: joelanford/go-apidiff@v0.6.0
 
       - name: Setup go-acc
