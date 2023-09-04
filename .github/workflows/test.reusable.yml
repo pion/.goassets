@@ -40,19 +40,23 @@ jobs:
         uses: joelanford/go-apidiff@v0.6.0
 
       - name: Setup go-acc
+        if: always()
         run: go install github.com/ory/go-acc@latest
 
       - name: Setup gotestfmt
+        if: always()
         uses: haveyoudebuggedit/gotestfmt-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
 
       - name: Run pre test hook
+        if: always()
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           if [ -n "${PRE_TEST_HOOK}" ]; then ${PRE_TEST_HOOK}; fi
 
       - name: Run test
+        if: always()
         run: |
           TEST_BENCH_OPTION="-bench=."
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
@@ -64,6 +68,7 @@ jobs:
             -v -race 2>&1 | grep -v '^go: downloading' | tee /tmp/gotest.log | gotestfmt
 
       - name: Run post test hook
+        if: always()
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           if [ -n "${POST_TEST_HOOK}" ]; then ${POST_TEST_HOOK}; fi
