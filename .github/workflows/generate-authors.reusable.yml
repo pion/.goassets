@@ -39,13 +39,13 @@ jobs:
     if: needs.check-secret.outputs.is_token_set == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
           token: ${{ secrets.token }}
       - name: Checkout .goassets
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: pion/.goassets
           path: ${{ github.workspace }}/.github/.goassets

@@ -18,11 +18,11 @@ jobs:
     name: Metadata
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Checkout .goassets
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: pion/.goassets
           path: ${{ github.workspace }}/.github/.goassets
@@ -47,7 +47,7 @@ jobs:
       pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
