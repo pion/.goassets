@@ -39,6 +39,4 @@ jobs:
             -v $HOME/.cache:/.cache \
             -w /go/src/github.com/pion/$(basename $GITHUB_WORKSPACE) \
             i386/golang:${{inputs.go-version}}-alpine \
-            /usr/local/go/bin/go test \
-              ${TEST_EXTRA_ARGS:-} \
-              -v ./...
+            /bin/sh -c "go install github.com/gotesttools/gotestfmt/v2/cmd/gotestfmt@latest; /usr/local/go/bin/go test ${TEST_EXTRA_ARGS:-} -json -v ./... | gotestfmt"
