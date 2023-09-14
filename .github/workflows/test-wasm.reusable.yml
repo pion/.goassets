@@ -59,7 +59,7 @@ jobs:
             -exec="${GO_JS_WASM_EXEC}" \
             -v ./...
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           name: codecov-umbrella
           fail_ci_if_error: true
