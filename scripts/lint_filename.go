@@ -11,7 +11,7 @@ import (
 	"regexp"
 )
 
-func lintFileName() {
+func main() {
 	parentDir, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)

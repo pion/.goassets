@@ -13,7 +13,7 @@ import (
 	"regexp"
 )
 
-func lintGoModVersion() {
+func main() {
 	// Get the path of the current script
 	scriptPath, err := filepath.Abs(os.Args[0])
 	if err != nil {
