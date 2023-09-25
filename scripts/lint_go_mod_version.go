@@ -24,7 +24,7 @@ func main() {
 	// Read the .ci.conf file if it exists
 	ciConfPath := filepath.Join(scriptDir, ".ci.conf")
 	if _, err := os.Stat(ciConfPath); err == nil {
-		if err := readCiConf(ciConfPath); err != nil {
+		if err := readCIConf(ciConfPath); err != nil {
 			log.Fatal(err)
 		}
 	}
