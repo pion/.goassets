@@ -37,14 +37,14 @@ jobs:
       - name: Commit Message
         run: .github/.goassets/scripts/lint-commit-message.sh
 
-      - name: File names
-        run:  go run .github/.goassets/scripts/lint_filename.go
-
       - name: Logging messages should not have trailing newlines
         run: .github/.goassets/scripts/lint-no-trailing-newline-in-log-messages.sh
 
+      - name: File names
+        run: go run .github/.goassets/scripts/lint_filename.go
+
       - name: Go version in go.mod
-        run: .github/.goassets/scripts/lint-go-mod-version.sh
+        run: go run .github/.goassets/scripts/lint_go_mod_version.go
 
   lint-go:
     name: Go
