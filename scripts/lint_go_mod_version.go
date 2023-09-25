@@ -65,7 +65,7 @@ func main() {
 	}
 }
 
-func readCiConf(ciConfPath string) error {
+func readCIConf(ciConfPath string) error {
 	ciConfFile, err := os.Open(ciConfPath)
 	if err != nil {
 		return err
