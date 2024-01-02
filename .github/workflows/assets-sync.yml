@@ -42,7 +42,6 @@ jobs:
           rm: |
             .github/hooks/*
             .github/workflows/renovate-go-mod-fix.yaml
-            .github/generate-authors.sh
             .github/lint-*.sh
           push_interval: 10
           git_user: Pion Bot

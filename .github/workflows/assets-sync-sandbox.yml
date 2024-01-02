@@ -20,7 +20,6 @@ jobs:
           rm: |
             .github/hooks/*
             .github/workflows/renovate-go-mod-fix.yaml
-            .github/generate-authors.sh
             .github/lint-*.sh
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
