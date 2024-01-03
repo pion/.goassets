@@ -18,6 +18,7 @@ jobs:
           repos: |
             pion/datachannel
             pion/dtls
+            pion/example-webrtc-applications
             pion/ice
             pion/interceptor
             pion/logging
