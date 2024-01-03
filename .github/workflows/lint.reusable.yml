@@ -55,6 +55,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Run pre lint hook
+        if: always()
+        run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${PRE_LINT_HOOK}" ]; then ${PRE_LINT_HOOK}; fi
+
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
