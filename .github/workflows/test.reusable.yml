@@ -37,7 +37,7 @@ jobs:
 
       - name: Check API compatability
         if: github.ref != 'refs/heads/master'
-        uses: joelanford/go-apidiff@d831fb770b45977a96c80bff011666d5affd0101 # v0.7.0
+        uses: joelanford/go-apidiff@002aa613b261e8d1547b516fb71793280f05bb78 # v0.8.2
 
       - name: Setup go-acc
         if: always()
