@@ -62,7 +62,7 @@ jobs:
           if [ -n "${PRE_LINT_HOOK}" ]; then ${PRE_LINT_HOOK}; fi
 
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v4
         with:
           version: v1.52.2
           args: $GOLANGCI_LINT_EXRA_ARGS
