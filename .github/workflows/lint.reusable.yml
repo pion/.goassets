@@ -53,6 +53,11 @@ jobs:
       pull-requests: read
     runs-on: ubuntu-latest
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
       - uses: actions/checkout@v4
 
       - name: Run pre lint hook
