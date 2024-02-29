@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+# SPDX-License-Identifier: MIT
+
+name: API
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  compatibility:
+    name: Compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+      - name: Check API compatability
+        uses: joelanford/go-apidiff@002aa613b261e8d1547b516fb71793280f05bb78 # v0.8.2
