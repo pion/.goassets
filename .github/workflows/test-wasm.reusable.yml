@@ -33,9 +33,14 @@ jobs:
           restore-keys: ${{ runner.os }}-wasm-go-
 
       - name: Download Go
-        run: curl -sSfL https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz | tar -C ~ -xzf -
-        env:
-          GO_VERSION: ${{ inputs.go-version }}
+        run: |
+          version=$(
+            curl -s 'https://go.dev/dl/?mode=json&include=all' \
+              | jq -r '.[].version | select(startswith("go${{ inputs.go-version }}."))' \
+              | sort -V \
+              | tail -n 1
+          )
+          curl -sSfL https://dl.google.com/go/${version}.linux-amd64.tar.gz | tar -C ~ -xzf -
 
       - name: Set Go Root
         run: echo "GOROOT=${HOME}/go" >> $GITHUB_ENV
