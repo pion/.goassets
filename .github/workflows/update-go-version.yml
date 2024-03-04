@@ -25,7 +25,7 @@ jobs:
           go_minor_prev=$((${go_minor} - 1))
           go_version_prev=${go_major}.${go_minor_prev}
 
-          scripts="$(find ./scipts -name "*.sh")"
+          scripts="$(find ./scripts -name "*.sh")"
           workflows="$(find ./ci/.github/workflows -name "*.yaml" -o -name "*.yml")"
 
           sed "s|\[.*\]\( # auto-update/supported-go-version-list\)|[\"${go_version}\", \"${go_version_prev}\"]\1|" -i ${workflows}
