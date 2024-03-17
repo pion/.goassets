@@ -29,7 +29,6 @@ jobs:
             pion/randutil
             pion/rtcp
             pion/rtp
-            pion/rtpio
             pion/sctp
             pion/sdp
             pion/simulnet
