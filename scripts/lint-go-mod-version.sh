@@ -29,4 +29,5 @@ if [[ ${GO_MOD_VERSION} != ${GO_MOD_VERSION_EXPECTED} ]]; then
     echo "  Found    ${GO_MOD_VERSION}"
     echo "  Expected ${GO_MOD_VERSION_EXPECTED}"
   fi
+  exit 1
 fi
