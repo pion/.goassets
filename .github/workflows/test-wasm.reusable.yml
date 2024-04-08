@@ -78,4 +78,4 @@ jobs:
           fail_ci_if_error: true
           flags: wasm
           name: codecov-umbrella
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ env.CODECOV_TOKEN }}
