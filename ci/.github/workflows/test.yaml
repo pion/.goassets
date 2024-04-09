@@ -21,6 +21,7 @@ on:
 jobs:
   get-env-vars:
     name: Get Environment vars
+    runs-on: ubuntu-latest
     outputs:
       CODECOV_TOKEN: ${{ env.CODECOV_TOKEN }}
     steps:
