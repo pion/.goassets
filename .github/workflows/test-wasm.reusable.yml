@@ -8,9 +8,6 @@ on:
       go-version:
         required: true
         type: string
-      codecov-token:
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -81,4 +78,4 @@ jobs:
           fail_ci_if_error: true
           flags: wasm
           name: codecov-umbrella
-          token: ${{ inputs.codecov-token }}
+          token: ${{ secrets.CODECOV_TOKEN }}
