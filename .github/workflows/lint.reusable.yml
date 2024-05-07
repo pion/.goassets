@@ -41,7 +41,7 @@ jobs:
         run:  go run .github/.goassets/scripts/lint_filename.go
 
       - name: Logging messages should not have trailing newlines
-        run: .github/.goassets/scripts/lint-no-trailing-newline-in-log-messages.sh
+        run:  go run .github/.goassets/scripts/lint_no_trailing_newline_in_log_messages.go
 
       - name: Go version in go.mod
         run: .github/.goassets/scripts/lint-go-mod-version.sh
