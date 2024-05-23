@@ -9,8 +9,8 @@ SCRIPT_PATH=$(
   pwd -P
 )
 
-if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
-  . ${SCRIPT_PATH}/.ci.conf
+if [ -f ${SCRIPT_PATH}/../../.ci.conf ]; then
+  . ${SCRIPT_PATH}/../../.ci.conf
 fi
 
 if [ -z "${GO_MOD_VERSION_EXPECTED}" ]; then

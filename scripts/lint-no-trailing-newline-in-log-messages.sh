@@ -8,8 +8,8 @@ SCRIPT_PATH=$(
   cd "$(dirname "${BASH_SOURCE[0]}")"
   pwd -P
 )
-if [ -f ${SCRIPT_PATH}/.ci.conf ]; then
-  . ${SCRIPT_PATH}/.ci.conf
+if [ -f ${SCRIPT_PATH}/../../.ci.conf ]; then
+  . ${SCRIPT_PATH}/../../.ci.conf
 fi
 
 FILES=$(
