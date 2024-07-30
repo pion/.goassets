@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test-i386:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Go i386 ${{ inputs.go-version }}
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +36,9 @@ jobs:
 
       - name: Run test
         run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${SKIP_i386_TESTS}" ]; then exit 0; fi
+
           mkdir -p $HOME/go/pkg/mod $HOME/.cache
           docker run \
             -u $(id -u):$(id -g) \
