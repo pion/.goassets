@@ -30,7 +30,7 @@ jobs:
       - name: Build worker
         run: |
           docker build -t test_runner_i386_${{inputs.go-version}}:latest -<<EOF
-          FROM i386/golang:${{inputs.go-version}}-alpine
+          FROM i386/golang:${{inputs.go-version}}
           RUN go install github.com/gotesttools/gotestfmt/v2/cmd/gotestfmt@latest
           EOF
 
