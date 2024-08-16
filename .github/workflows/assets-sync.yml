@@ -30,7 +30,6 @@ jobs:
             pion/rtp
             pion/sctp
             pion/sdp
-            pion/simulnet
             pion/srtp
             pion/stun
             pion/template
