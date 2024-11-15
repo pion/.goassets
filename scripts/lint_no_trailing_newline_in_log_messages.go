@@ -37,8 +37,7 @@ func main() {
 
 		for _, match := range logReg.FindAll(fileContents, -1) {
 			if !strings.Contains(string(match), "nolint") {
-				return fmt.Errorf("Log format strings should have trailing new-line: %s", match)
-				os.Exit(1)
+				return fmt.Errorf("Log format strings should not have trailing new-line: %s", match)
 			}
 		}
 
