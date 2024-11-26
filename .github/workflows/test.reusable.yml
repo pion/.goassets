@@ -72,7 +72,7 @@ jobs:
           path: /tmp/gotest.log
           if-no-files-found: error
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         with:
           fail_ci_if_error: true
           flags: go
