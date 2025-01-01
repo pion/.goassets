@@ -89,7 +89,7 @@ linters:
     - funlen           # Tool for detection of long functions
     - gocyclo          # Computes and checks the cyclomatic complexity of functions
     - godot            # Check if comments end in a period
-    - gomnd            # An analyzer to detect magic numbers.
+    - mnd              # An analyzer to detect magic numbers
     - ireturn          # Accept Interfaces, Return Concrete Types
     - lll              # Reports long lines
     - maintidx         # maintidx measures the maintainability index of each function.
