@@ -57,7 +57,6 @@ linters:
     - goheader         # Checks is file header matches to pattern
     - goimports        # Goimports does everything that gofmt does. Additionally it checks unused imports
     - gomoddirectives  # Manage the use of 'replace', 'retract', and 'excludes' directives in go.mod.
-    - gomodguard       # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
     - goprintffuncname # Checks that printf-like functions are named with `f` at the end
     - gosec            # Inspects source code for security problems
     - gosimple         # Linter for Go source code that specializes in simplifying a code
@@ -82,8 +81,6 @@ linters:
     - unused           # Checks Go code for unused constants, variables, functions and types
     - wastedassign     # wastedassign finds wasted assignment statements
     - whitespace       # Tool for detection of leading and trailing whitespace
-  disable:
-    - depguard         # Go linter that checks if package imports are in a list of acceptable packages
     - containedctx     # containedctx is a linter that detects struct contained context.Context field
     - cyclop           # checks function and package cyclomatic complexity
     - funlen           # Tool for detection of long functions
@@ -99,15 +96,18 @@ linters:
     - nlreturn         # nlreturn checks for a new line before return and branch statements to increase code clarity
     - nolintlint       # Reports ill-formed or insufficient nolint directives
     - paralleltest     # paralleltest detects missing usage of t.Parallel() method in your Go test
+    - testpackage      # linter that makes you use a separate _test package
+    - thelper          # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
+    - varnamelen       # checks that the length of a variable's name matches its scope
+    - wsl              # Whitespace Linter - Forces you to use empty lines!
+  disable:
+    - depguard         # Go linter that checks if package imports are in a list of acceptable packages
+    - gomodguard       # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
     - prealloc         # Finds slice declarations that could potentially be preallocated
     - promlinter       # Check Prometheus metrics naming via promlint
     - rowserrcheck     # checks whether Err of rows is checked successfully
     - sqlclosecheck    # Checks that sql.Rows and sql.Stmt are closed.
-    - testpackage      # linter that makes you use a separate _test package
-    - thelper          # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
-    - varnamelen       # checks that the length of a variable's name matches its scope
     - wrapcheck        # Checks that errors returned from external packages are wrapped
-    - wsl              # Whitespace Linter - Forces you to use empty lines!
 
 issues:
   exclude-use-default: false
