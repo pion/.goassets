@@ -99,6 +99,7 @@ linters:
     - depguard         # Go linter that checks if package imports are in a list of acceptable packages
     - gochecknoinits   # Checks that no init functions are present in Go code
     - gomodguard       # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
+    - interfacebloat   # A linter that checks length of interface.
     - ireturn          # Accept Interfaces, Return Concrete Types
     - mnd              # An analyzer to detect magic numbers
     - nolintlint       # Reports ill-formed or insufficient nolint directives
