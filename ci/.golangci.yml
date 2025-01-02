@@ -8,6 +8,7 @@ linters-settings:
   govet:
     enable:
       - shadow
+      - unusedwrite
   misspell:
     locale: US
   exhaustive:
