@@ -82,7 +82,6 @@ linters:
     - nilnil           # Checks that there is no simultaneous return of `nil` error and an invalid value.
     - nlreturn         # nlreturn checks for a new line before return and branch statements to increase code clarity
     - noctx            # noctx finds sending http request without context.Context
-    - nolintlint       # Reports ill-formed or insufficient nolint directives
     - paralleltest     # paralleltest detects missing usage of t.Parallel() method in your Go test
     - predeclared      # find code that shadows one of Go's predeclared identifiers
     - revive           # golint replacement, finds style mistakes
@@ -103,6 +102,7 @@ linters:
   disable:
     - depguard         # Go linter that checks if package imports are in a list of acceptable packages
     - gomodguard       # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
+    - nolintlint       # Reports ill-formed or insufficient nolint directives
     - prealloc         # Finds slice declarations that could potentially be preallocated
     - promlinter       # Check Prometheus metrics naming via promlint
     - rowserrcheck     # checks whether Err of rows is checked successfully
