@@ -51,7 +51,6 @@ linters:
     - funlen           # Tool for detection of long functions
     - gci              # Gci control golang package import order and make it always deterministic.
     - gochecknoglobals # Checks that no globals are present in Go code
-    - gochecknoinits   # Checks that no init functions are present in Go code
     - gocognit         # Computes and checks the cognitive complexity of functions
     - goconst          # Finds repeated strings that could be replaced by a constant
     - gocritic         # The most opinionated Go source code linter
@@ -70,12 +69,10 @@ linters:
     - grouper          # An analyzer to analyze expression groups.
     - importas         # Enforces consistent import aliases
     - ineffassign      # Detects when assignments to existing variables are not used
-    - ireturn          # Accept Interfaces, Return Concrete Types
     - lll              # Reports long lines
     - maintidx         # maintidx measures the maintainability index of each function.
     - makezero         # Finds slice declarations with non-zero initial length
     - misspell         # Finds commonly misspelled English words in comments
-    - mnd              # An analyzer to detect magic numbers
     - nakedret         # Finds naked returns in functions greater than a specified function length
     - nestif           # Reports deeply nested if statements
     - nilerr           # Finds the code that returns nil even if it checks that the error is not nil.
@@ -98,10 +95,12 @@ linters:
     - varnamelen       # checks that the length of a variable's name matches its scope
     - wastedassign     # wastedassign finds wasted assignment statements
     - whitespace       # Tool for detection of leading and trailing whitespace
-    - wsl              # Whitespace Linter - Forces you to use empty lines!
   disable:
     - depguard         # Go linter that checks if package imports are in a list of acceptable packages
+    - gochecknoinits   # Checks that no init functions are present in Go code
     - gomodguard       # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
+    - ireturn          # Accept Interfaces, Return Concrete Types
+    - mnd              # An analyzer to detect magic numbers
     - nolintlint       # Reports ill-formed or insufficient nolint directives
     - prealloc         # Finds slice declarations that could potentially be preallocated
     - promlinter       # Check Prometheus metrics naming via promlint
@@ -109,6 +108,7 @@ linters:
     - sqlclosecheck    # Checks that sql.Rows and sql.Stmt are closed.
     - tparallel        # tparallel detects inappropriate usage of t.Parallel() method in your Go test codes
     - wrapcheck        # Checks that errors returned from external packages are wrapped
+    - wsl              # Whitespace Linter - Forces you to use empty lines!
 
 issues:
   exclude-use-default: false
