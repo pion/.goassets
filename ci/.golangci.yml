@@ -32,17 +32,11 @@ linters-settings:
     ignore-map-index-ok: true
     ignore-chan-recv-ok: true
     ignore-decls:
-      - pc *PeerConnection
-      - pc *webrtc.PeerConnection
-      - wg *sync.WaitGroup
-      - wg sync.WaitGroup
       - i int
       - n int
-      - m map[string]interface{}
       - w io.Writer
       - r io.Reader
       - b []byte
-
 
 linters:
   enable:
