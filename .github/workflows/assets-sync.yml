@@ -24,7 +24,7 @@ jobs:
             pion/logging
             pion/mdns
             pion/opus
-            pion/peerconnection_explainer
+            pion/explainer
             pion/randutil
             pion/rtcp
             pion/rtp
