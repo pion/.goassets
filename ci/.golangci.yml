@@ -25,6 +25,7 @@ linters-settings:
       - ^os.Exit$
       - ^panic$
       - ^print(ln)?$
+      - ^t.(Error|Errorf|Fatal|Fatalf|Fail|FailNow)$
   varnamelen:
     max-distance: 12
     min-name-length: 2
