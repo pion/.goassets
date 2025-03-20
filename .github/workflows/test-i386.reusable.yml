@@ -27,6 +27,16 @@ jobs:
           key: ${{ runner.os }}-i386-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-i386-go-
 
+      # Github runners do not support native external IPv6 connectivity:
+      #              https://github.com/actions/runner-images/issues/668
+      # This customization can be removed after IPv6 is natively supported.
+      #
+      # Note that `docker create network --ipv6` creates a dual IPv4+IPv6
+      # network, because IPv4 is enabled by default.
+      - name: Build network
+        run: |
+          docker network create --ipv6 --subnet=fd43:7516:3e1b::/48 networkWithIPv6
+
       - name: Build worker
         run: |
           docker build -t test_runner_i386_${{inputs.go-version}}:latest -<<EOF
@@ -48,5 +58,6 @@ jobs:
             -v $HOME/go/pkg/mod:/go/pkg/mod \
             -v $HOME/.cache:/.cache \
             -w /go/src/github.com/pion/$(basename $GITHUB_WORKSPACE) \
+            --network=networkWithIPv6 \
             test_runner_i386_${{inputs.go-version}}:latest \
             /bin/sh -c "/usr/local/go/bin/go test ${TEST_EXTRA_ARGS:-} -json -v ./... | gotestfmt"              ${TEST_EXTRA_ARGS:-} \
