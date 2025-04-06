@@ -56,7 +56,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.23'
+          go-version: '1.24'
 
       - uses: actions/checkout@v4
 
@@ -69,4 +69,5 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
         with:
-          version: v1.63.4
+          version: v2.1.6
+          args: $GOLANGCI_LINT_EXRA_ARGS
