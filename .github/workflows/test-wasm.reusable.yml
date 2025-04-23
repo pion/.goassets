@@ -37,19 +37,10 @@ jobs:
           )
           curl -sSfL https://dl.google.com/go/${version}.linux-amd64.tar.gz | tar -C ~ -xzf -
 
-      - name: Node version
-        id: node-version
-        run: |
-          if [ '${{ inputs.go-version }}' = '1.20' ]; then
-            # Go 1.20's wasm_exec_node.js doesn't work with Node v20
-            # This can be removed once all pion repositories are switched to use Go 1.22
-            echo 'version=16' | tee -a ${GITHUB_OUTPUT}
-          fi
-
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.node-version.outputs.version || 20 }}.x'
+          node-version: latest
 
       - name: Set Go Root
         run: echo "GOROOT=${HOME}/go" >> $GITHUB_ENV
@@ -58,7 +49,7 @@ jobs:
         run: echo "GOPATH=${HOME}/go" >> $GITHUB_ENV
 
       - name: Set Go Path
-        run: echo "GO_JS_WASM_EXEC=${GOROOT}/misc/wasm/go_js_wasm_exec" >> $GITHUB_ENV
+        run: echo "GO_JS_WASM_EXEC=${GOROOT}/lib/wasm/go_js_wasm_exec" >> $GITHUB_ENV
 
       - name: Install NPM modules
         run: yarn install
