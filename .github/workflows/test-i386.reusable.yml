@@ -53,4 +53,4 @@ jobs:
             -w /go/src/github.com/pion/$(basename $GITHUB_WORKSPACE) \
             --network=networkWithIPv6 \
             i386/golang:${{inputs.go-version}}-alpine \
-            /bin/sh -c "/usr/local/go/bin/go test -bench=. -v -race ./..."
+            /bin/sh -c "/usr/local/go/bin/go test -bench=. -v ./..."
