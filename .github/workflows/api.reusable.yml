@@ -21,13 +21,13 @@ jobs:
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           if [ -n "${SKIP_API_DIFF}" ]; then
-            echo 'skip=true';
+            echo "SKIP=true" >> $GITHUB_OUTPUT
           else
-            echo 'skip=false';
+            echo "SKIP=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Setup Go
-        if: steps.check-skip-diff.outputs.skip == 'false'
+        if: steps.check-skip-diff.outputs.SKIP == 'false'
         uses: actions/setup-go@v5
         with:
           go-version: 'stable'
