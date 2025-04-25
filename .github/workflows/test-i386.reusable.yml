@@ -37,13 +37,6 @@ jobs:
         run: |
           docker network create --ipv6 --subnet=fd43:7516:3e1b::/48 networkWithIPv6
 
-      - name: Build worker
-        run: |
-          docker build -t test_runner_i386_${{inputs.go-version}}:latest -<<EOF
-          FROM i386/golang:${{inputs.go-version}}-alpine
-          RUN go install github.com/gotesttools/gotestfmt/v2/cmd/gotestfmt@latest
-          EOF
-
       - name: Run test
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
@@ -59,5 +52,5 @@ jobs:
             -v $HOME/.cache:/.cache \
             -w /go/src/github.com/pion/$(basename $GITHUB_WORKSPACE) \
             --network=networkWithIPv6 \
-            test_runner_i386_${{inputs.go-version}}:latest \
-            /bin/sh -c "/usr/local/go/bin/go test ${TEST_EXTRA_ARGS:-} -json -v ./... | gotestfmt"              ${TEST_EXTRA_ARGS:-} \
+            i386/golang:${{inputs.go-version}}-alpine \
+            /bin/sh -c "/usr/local/go/bin/go test -bench=. -v -race ./..."

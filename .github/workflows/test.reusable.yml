@@ -38,11 +38,6 @@ jobs:
       - name: Setup go-acc
         run: go install github.com/ory/go-acc@latest
 
-      - name: Setup gotestfmt
-        uses: haveyoudebuggedit/gotestfmt-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Avoid getting rate limited
-
       - name: Run pre test hook
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
@@ -50,14 +45,10 @@ jobs:
 
       - name: Run test
         run: |
-          TEST_BENCH_OPTION="-bench=."
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
 
           set -euo pipefail
-          go-acc -o cover.out ./... -- \
-            ${TEST_BENCH_OPTION} \
-            -json \
-            -v -race 2>&1 | grep -v '^go: downloading' | tee /tmp/gotest.log | gotestfmt
+          go-acc -o cover.out ./... -- -bench=. -v -race 2>&1 | tee /tmp/gotest.log
 
       - name: Run post test hook
         run: |
