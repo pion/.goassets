@@ -17,12 +17,21 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check SKIP_API_DIFF
+        id: check-skip-diff
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
-          if [ -n "${SKIP_API_DIFF}" ]; then exit 0; fi
+          if [ -n "${SKIP_API_DIFF}" ]; then
+            echo 'skip=true';
+          else
+            echo 'skip=false';
+          fi
+
       - name: Setup Go
+        if: steps.check-skip-diff.outputs.skip == 'false'
         uses: actions/setup-go@v5
         with:
           go-version: 'stable'
+
       - name: Check API compatability
+        if: steps.check-skip-diff.outputs.skip == 'false'
         uses: joelanford/go-apidiff@002aa613b261e8d1547b516fb71793280f05bb78 # v0.8.2
