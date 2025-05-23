@@ -34,4 +34,4 @@ jobs:
 
       - name: Check API compatability
         if: steps.check-skip-diff.outputs.skip == 'false'
-        uses: joelanford/go-apidiff@002aa613b261e8d1547b516fb71793280f05bb78 # v0.8.2
+        uses: joelanford/go-apidiff@60c4206be8f84348ebda2a3e0c3ac9cb54b8f685 # v0.8.3
