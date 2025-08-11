@@ -16,7 +16,7 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
         # The code in examples/ might intentionally do things like log credentials
         # in order to show how the library is used, aid in debugging etc. We
