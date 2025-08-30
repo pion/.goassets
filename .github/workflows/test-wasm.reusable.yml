@@ -51,6 +51,9 @@ jobs:
       - name: Set Go Path
         run: echo "GO_JS_WASM_EXEC=${GOROOT}/lib/wasm/go_js_wasm_exec" >> $GITHUB_ENV
 
+      - name: Add Go to path
+        run: echo "${GOPATH}/bin" >> $GITHUB_PATH
+
       - name: Install NPM modules
         run: yarn install
 
@@ -58,7 +61,7 @@ jobs:
         run: |
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           GOOS=js GOARCH=wasm \
-          ${GOPATH}/bin/go test \
+          go test \
             -coverprofile=cover.out \
             -covermode=atomic \
             -exec="${GO_JS_WASM_EXEC}" \
