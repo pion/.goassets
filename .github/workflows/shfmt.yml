@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Apply format
         run: go run mvdan.cc/sh/v3/cmd/shfmt@latest -i 2 -ci -bn -l -w .
       - name: Check diff
