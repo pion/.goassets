@@ -38,7 +38,7 @@ jobs:
           curl -sSfL https://dl.google.com/go/${version}.linux-amd64.tar.gz | tar -C ~ -xzf -
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: latest
 
