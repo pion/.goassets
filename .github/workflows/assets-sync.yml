@@ -19,12 +19,12 @@ jobs:
             pion/datachannel
             pion/dtls
             pion/example-webrtc-applications
+            pion/explainer
             pion/ice
             pion/interceptor
             pion/logging
             pion/mdns
             pion/opus
-            pion/explainer
             pion/randutil
             pion/rtcp
             pion/rtp
@@ -36,6 +36,7 @@ jobs:
             pion/transport
             pion/turn
             pion/webrtc
+            pion/zapion
           root_dir: ci
           rm: |
             .github/hooks/*
