@@ -39,9 +39,9 @@ shfmt -i 2 -ci -bn -l -w .
 The repository is used as a part of our WebRTC implementation. Please refer to that [roadmap](https://github.com/pion/webrtc/issues/9) to track our major milestones.
 
 ### Community
-Pion has an active community on the [Slack](https://pion.ly/slack).
+Pion has an active community on the [Discord](https://discord.gg/PngbdqpFbt).
 
-Follow the [Pion Twitter](https://twitter.com/_pion) for project updates and important WebRTC news.
+Follow the [Pion Bluesky](https://bsky.app/profile/pion.ly) or [Pion Twitter](https://twitter.com/_pion) for project updates and important WebRTC news.
 
 We are always looking to support **your projects**. Please reach out if you have something to build!
 If you need commercial support or don't want to use public methods you can contact us at [team@pion.ly](mailto:team@pion.ly)
