@@ -16,6 +16,7 @@ jobs:
         uses: at-wat/assets-sync-action@v0
         with:
           repos: |
+            pion/bwe-test
             pion/datachannel
             pion/dtls
             pion/example-webrtc-applications
