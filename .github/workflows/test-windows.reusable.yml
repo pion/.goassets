@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+# SPDX-License-Identifier: MIT
+
+name: Test Windows (reusable)
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test-windows:
+    runs-on: windows-latest
+    name: Go Windows ${{ inputs.go-version }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache
+          key: ${{ runner.os }}-windows-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-windows-go-
+
+      - name: Run tests
+        run: go test ./...
+
