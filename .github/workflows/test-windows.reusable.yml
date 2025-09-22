@@ -28,5 +28,10 @@ jobs:
           restore-keys: ${{ runner.os }}-windows-go-
 
       - name: Run tests
-        run: go test ./...
+        shell: bash
+        run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${SKIP_WINDOWS_TESTS}" ]; then exit 0; fi
+
+          go test ./...
 
