@@ -41,18 +41,40 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - name: Run all fuzz targets (${{ inputs.fuzz-time }} each)
+      - name: Install GNU Parallel
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y parallel
+
+      - name: Run all fuzz targets (${{ inputs.fuzz-time }} each) in parallel
         shell: bash
         run: |
           set -euo pipefail
+
+          targets_file=$(mktemp)
           for pkg in $(go list ./...); do
-            targets=$(go test "$pkg" -list '^Fuzz' | grep '^Fuzz' || true)
-            for t in $targets; do
-              echo "::group::Fuzzing $pkg/$t"
-              go test -run=^$ -fuzz="$t" -fuzztime=${{ inputs.fuzz-time }} "$pkg"
-              echo "::endgroup::"
+            for t in $(go test "$pkg" -list '^Fuzz' | grep '^Fuzz' || true); do
+              echo "$pkg $t"
             done
-          done
+          done > "$targets_file"
+
+          if [ ! -s "$targets_file" ]; then
+            echo "No fuzz targets found"
+            rm "$targets_file"
+            exit 0
+          fi
+
+          echo "Found $(wc -l < "$targets_file") fuzz target(s)"
+
+          parallel --colsep ' ' -j 4 --joblog fuzz-parallel.log --line-buffer \
+            'echo "::group::Fuzzing {1}/{2}"; go test -run=^$ -fuzz={2} -fuzztime=${{ inputs.fuzz-time }} {1}; echo "::endgroup::"' \
+            :::: "$targets_file"
+
+          rm "$targets_file"
+
+          echo "Parallel execution summary:"
+          cat fuzz-parallel.log
 
       - name: Upload fuzz artifacts
         if: always()
