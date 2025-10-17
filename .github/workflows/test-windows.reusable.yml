@@ -33,5 +33,5 @@ jobs:
           if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
           if [ -n "${SKIP_WINDOWS_TESTS}" ]; then exit 0; fi
 
-          go test ./...
+          go test -race ./...
 
