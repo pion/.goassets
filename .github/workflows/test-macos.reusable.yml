@@ -27,6 +27,11 @@ jobs:
           key: ${{ runner.os }}-macos-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-macos-go-
 
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ inputs.go-version }}
+
       - name: Run tests
         shell: bash
         run: |
