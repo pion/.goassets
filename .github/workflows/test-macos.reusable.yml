@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+# SPDX-License-Identifier: MIT
+
+name: Test macOS (reusable)
+on:
+  workflow_call:
+    inputs:
+      go-version:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test-macos:
+    runs-on: macos-14
+    name: Go macOS ${{ inputs.go-version }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/Library/Caches
+          key: ${{ runner.os }}-macos-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-macos-go-
+
+      - name: Run tests
+        shell: bash
+        run: |
+          if [ -f .github/.ci.conf ]; then . .github/.ci.conf; fi
+          if [ -n "${SKIP_MACOS_TESTS}" ]; then exit 0; fi
+
+          go test -race ./...
+
