@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test-macos:
-    runs-on: macos-15
+    runs-on: macos-14
     name: Go macOS ${{ inputs.go-version }}
     steps:
       - uses: actions/checkout@v5
