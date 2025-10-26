@@ -35,7 +35,7 @@ jobs:
           ref: ${{ inputs.goassets-ref }}
 
       - name: Commit Message
-        run: .github/.goassets/scripts/lint-commit-message.sh
+        run: go run .github/.goassets/scripts/lint_commit_message.go
 
       - name: File names
         run:  go run .github/.goassets/scripts/lint_filename.go

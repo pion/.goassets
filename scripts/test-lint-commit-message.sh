@@ -43,7 +43,7 @@ for i in "${!GOOD_COMMITS_MESSAGES[@]}"; do
   TEST_COMMIT_MSG=${GOOD_COMMITS_MESSAGES[$i]}
 
   echo -n "$TEST_COMMIT_MSG" >TEST_COMMIT_MSG
-  ./lint-commit-message.sh TEST_COMMIT_MSG >/dev/null
+  go run ./lint_commit_message.go TEST_COMMIT_MSG > /dev/null
 
   if [[ $? -ne 0 ]]; then
     print_fail
@@ -78,7 +78,7 @@ for i in "${!BAD_COMMITS_MESSAGES[@]}"; do
   TEST_COMMIT_MSG=${BAD_COMMITS_MESSAGES[$i]}
 
   echo -n "$TEST_COMMIT_MSG" >TEST_COMMIT_MSG
-  ./lint-commit-message.sh TEST_COMMIT_MSG >/dev/null
+  go run ./lint_commit_message.go TEST_COMMIT_MSG > /dev/null
 
   if [[ $? -ne 1 ]]; then
     print_fail

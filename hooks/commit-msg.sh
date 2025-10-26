@@ -4,4 +4,4 @@
 
 set -e
 
-.github/.goassets/scripts/lint-commit-message.sh $1
+go run .github/.goassets/scripts/lint_commit_message.go $1
