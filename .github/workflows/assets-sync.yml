@@ -29,6 +29,7 @@ jobs:
             pion/opus
             pion/randutil
             pion/rtcp
+            pion/quic
             pion/rtp
             pion/sctp
             pion/sdp
