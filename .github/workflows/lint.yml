@@ -9,6 +9,10 @@ jobs:
   commit-lint:
     runs-on: ubuntu-24.04
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: 'stable'
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -16,6 +20,6 @@ jobs:
       - name: Copy scripts
         run: |
           mkdir -p .github/.goassets/
-          cp -r scripts/lint-commit-message.sh .github/.goassets/
+          cp -r scripts/lint_commit_message.go .github/.goassets/
       - name: Lint commit message
-        run: .github/.goassets/lint-commit-message.sh
+        run: go run .github/.goassets/lint_commit_message.go
