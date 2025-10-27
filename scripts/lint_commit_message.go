@@ -1,3 +1,7 @@
+/*
+SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
+SPDX-License-Identifier: MIT
+*/
 package main
 
 import (
@@ -22,8 +26,8 @@ func validateSubject(subj string) (bool, string) {
 			return false, "Limit the subject line to 50 characters"
 		}
 	}
-	not_capitalized, _ := regexp.Match("^[A-Z]", []byte(subj))
-	if not_capitalized {
+	capitalized, _ := regexp.Match("^[A-Z]", []byte(subj))
+	if !capitalized {
 		return false, "Capitalize the subject line"
 	}
 	ends_with_period, _ := regexp.Match("\\.$", []byte(subj))

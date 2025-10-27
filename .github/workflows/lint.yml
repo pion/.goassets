@@ -22,4 +22,4 @@ jobs:
           mkdir -p .github/.goassets/
           cp -r scripts/lint_commit_message.go .github/.goassets/
       - name: Lint commit message
-        run: .github/.goassets/lint_commit_message.go
+        run: go run .github/.goassets/lint_commit_message.go

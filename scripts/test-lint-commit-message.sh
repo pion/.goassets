@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2023 The Pion community <https://pion.ly>
 # SPDX-License-Identifier: MIT
 
-# This is a test for lint-commit-message.sh script
+# This is a test for lint_commit_message.go script
 # This script is not intended for linting commit messages
 
 function on_exit {
@@ -43,7 +43,7 @@ for i in "${!GOOD_COMMITS_MESSAGES[@]}"; do
   TEST_COMMIT_MSG=${GOOD_COMMITS_MESSAGES[$i]}
 
   echo -n "$TEST_COMMIT_MSG" >TEST_COMMIT_MSG
-  go run ./lint_commit_message.go TEST_COMMIT_MSG > /dev/null
+  go run ./lint_commit_message.go TEST_COMMIT_MSG >/dev/null
 
   if [[ $? -ne 0 ]]; then
     print_fail
@@ -78,7 +78,7 @@ for i in "${!BAD_COMMITS_MESSAGES[@]}"; do
   TEST_COMMIT_MSG=${BAD_COMMITS_MESSAGES[$i]}
 
   echo -n "$TEST_COMMIT_MSG" >TEST_COMMIT_MSG
-  go run ./lint_commit_message.go TEST_COMMIT_MSG > /dev/null
+  go run ./lint_commit_message.go TEST_COMMIT_MSG >/dev/null
 
   if [[ $? -ne 1 ]]; then
     print_fail
