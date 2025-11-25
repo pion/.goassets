@@ -31,6 +31,7 @@ jobs:
             pion/rtcp
             pion/quic
             pion/rtp
+            pion/rtwatch
             pion/sctp
             pion/sdp
             pion/srtp
@@ -39,6 +40,7 @@ jobs:
             pion/transport
             pion/turn
             pion/webrtc
+            pion/webrtc-bench
             pion/zapion
           root_dir: ci
           rm: |
