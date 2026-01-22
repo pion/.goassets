@@ -12,10 +12,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v6
-      - name: Install Go
-        uses: actions/setup-go@v6
-        with:
-          go-version: 'stable'
       - name: sync CI configs
         uses: pion/assets-sync-action@master
         with:
@@ -26,7 +22,7 @@ jobs:
             .github/workflows/renovate-go-mod-fix.yaml
             .github/lint-*.sh
           script: |
-            go run "${ASSETS_DIR}/.github/tools/update_spdx_year.go"
+            bash "${ASSETS_DIR}/.github/tools/update_spdx_year.sh"
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
           github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
