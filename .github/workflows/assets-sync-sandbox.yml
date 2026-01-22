@@ -17,7 +17,7 @@ jobs:
         with:
           go-version: 'stable'
       - name: sync CI configs
-        uses: at-wat/assets-sync-action@v0
+        uses: pion/assets-sync-action@master
         with:
           repos: pion/ci-sandbox
           root_dir: ci
