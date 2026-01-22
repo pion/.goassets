@@ -13,7 +13,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v6
       - name: sync CI configs
-        uses: pion/assets-sync-action@master
+        uses: at-wat/assets-sync-action@v0
         with:
           repos: |
             pion/bwe
