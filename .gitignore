@@ -14,6 +14,7 @@
 bin/
 vendor/
 node_modules/
+.vscode/
 
 ### Files ###
 #############
@@ -25,3 +26,4 @@ cover.out
 *.wasm
 examples/sfu-ws/cert.pem
 examples/sfu-ws/key.pem
+*.test
