@@ -23,5 +23,5 @@ jobs:
   fuzz:
     uses: pion/.goassets/.github/workflows/fuzz.reusable.yml@master
     with:
-      go-version: "1.25" # auto-update/latest-go-version
+      go-version: "1.26" # auto-update/latest-go-version
       fuzz-time: "60s"
