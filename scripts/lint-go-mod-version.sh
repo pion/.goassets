@@ -14,7 +14,7 @@ if [ -f ${SCRIPT_PATH}/../../.ci.conf ]; then
 fi
 
 if [ -z "${GO_MOD_VERSION_EXPECTED}" ]; then
-  GO_MOD_VERSION_EXPECTED="1.24" # auto-update/prev-go-version
+  . ${SCRIPT_PATH}/go-mod-version.sh
 fi
 
 GO_MOD_FILE=go.mod

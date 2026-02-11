@@ -23,6 +23,7 @@ jobs:
             .github/lint-*.sh
           script: |
             bash "${ASSETS_DIR}/.github/tools/update_spdx_year.sh"
+            bash "${ASSETS_DIR}/.github/tools/update_go_mod_version.sh"
           git_user: Pion Bot
           git_email: 59523206+pionbot@users.noreply.github.com
           github_token: ${{ secrets.PIONBOT_ASSETS_SYNC_TOKEN }}
