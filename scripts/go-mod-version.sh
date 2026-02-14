@@ -2,5 +2,5 @@
 # SPDX-FileCopyrightText: 2026 The Pion community <https://pion.ly>
 # SPDX-License-Identifier: MIT
 
-GO_MOD_VERSION_EXPECTED="1.24"
+GO_MOD_VERSION_EXPECTED="1.24.0"
 
