@@ -3,4 +3,3 @@
 # SPDX-License-Identifier: MIT
 
 GO_MOD_VERSION_EXPECTED="1.24.0"
-
