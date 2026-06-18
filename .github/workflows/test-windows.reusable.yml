@@ -17,7 +17,7 @@ jobs:
     runs-on: windows-latest
     name: Go Windows ${{ inputs.go-version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/cache@v5
         with:
