@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-26
     name: Go macOS ${{ inputs.go-version }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/cache@v6
         with:
