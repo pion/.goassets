@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test-i386:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-24.04
     name: Go i386 ${{ inputs.go-version }}
     steps:
       - uses: actions/checkout@v7
