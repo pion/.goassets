@@ -20,7 +20,7 @@ permissions:
 jobs:
   lint-commit-message:
     name: Metadata
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Install Go
         uses: actions/setup-go@v6
@@ -55,7 +55,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Install Go
         uses: actions/setup-go@v6

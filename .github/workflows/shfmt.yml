@@ -6,7 +6,7 @@ on:
   pull_request:
 jobs:
   shfmt:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: checkout
         uses: actions/checkout@v7
@@ -14,4 +14,3 @@ jobs:
         run: go run mvdan.cc/sh/v3/cmd/shfmt@latest -i 2 -ci -bn -l -w .
       - name: Check diff
         run: git diff --exit-code
-
