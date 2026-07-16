@@ -28,7 +28,7 @@ jobs:
 
       - name: Setup Go
         if: steps.check-skip-diff.outputs.SKIP == 'false'
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: 'stable'
 
