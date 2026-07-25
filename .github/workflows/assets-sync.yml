@@ -22,7 +22,6 @@ jobs:
             pion/datachannel
             pion/dtls
             pion/example-webrtc-applications
-            pion/explainer
             pion/format
             pion/ice
             pion/interceptor
