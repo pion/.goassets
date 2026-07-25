@@ -23,14 +23,15 @@ jobs:
             pion/dtls
             pion/example-webrtc-applications
             pion/explainer
+            pion/format
             pion/ice
             pion/interceptor
             pion/logging
             pion/mdns
             pion/opus
+            pion/quic
             pion/randutil
             pion/rtcp
-            pion/quic
             pion/rtp
             pion/rtwatch
             pion/sctp
