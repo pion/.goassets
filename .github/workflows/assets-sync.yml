@@ -60,3 +60,14 @@ jobs:
             Update CI configs to %v
 
             Update lint scripts and CI configs.
+  release:
+    name: Create GitHub release
+    needs: sync
+    permissions:
+      contents: write
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ github.ref_name }}" --generate-notes --title "${{ github.ref_name }}"
