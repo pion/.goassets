@@ -6,6 +6,11 @@
 
 set -e
 
+# some asset-sync targets do not have a go.mod file.
+if [[ ! -f go.mod ]]; then
+  exit 0
+fi
+
 . "${ASSETS_DIR}/scripts/go-mod-version.sh"
 
 # Normalize expected version to semver so both 1.24 and 1.24.0 become 1.24.0.
