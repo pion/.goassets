@@ -31,10 +31,12 @@ jobs:
     steps:
       - name: Validate .goassets PR
         env:
+          REPOSITORY: ${{ github.repository }}
           HEAD: ${{ github.event.pull_request.head.ref }}
           TITLE: ${{ github.event.pull_request.title }}
         run: |
-          [[ "$HEAD" =~ ^sync-assets-v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$HEAD" =~ ^sync-assets-v[0-9]+\.[0-9]+\.[0-9]+$ ]] ||
+            [[ "$REPOSITORY" == "pion/ci-sandbox" && "$HEAD" == "sync-assets-main" ]]
           [[ "$TITLE" == "Update CI configs to ${HEAD#sync-assets-}" ]]
 
       - name: Approve
