@@ -78,6 +78,11 @@ linters:
     - wrapcheck        # Checks that errors returned from external packages are wrapped
     - wsl              # Whitespace Linter - Forces you to use empty lines!
   settings:
+    gosec:
+      excludes:
+        - G117 # noisy secret/password field-name checks.
+    lll:
+      line-length: 320
     staticcheck:
       checks:
         - all
