@@ -30,7 +30,7 @@ jobs:
         if: steps.check-skip-diff.outputs.SKIP == 'false'
         uses: actions/setup-go@v7
         with:
-          go-version: 'stable'
+          go-version: '1.26'
 
       - name: Check API compatability
         if: steps.check-skip-diff.outputs.skip == 'false'
