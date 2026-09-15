@@ -21,6 +21,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Select highest Go version for coverage
+        id: coverage
+        shell: bash
+        run: |
+          version=$(yq -er '.jobs.test.strategy.matrix.go[]' \
+            .github/workflows/test.yaml | sort -V | tail -n 1)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
       - uses: actions/cache@v6
         with:
           path: |
@@ -64,6 +72,7 @@ jobs:
           if-no-files-found: error
 
       - uses: codecov/codecov-action@v7
+        if: runner.os == 'Linux' && inputs.go-version == steps.coverage.outputs.version
         with:
           fail_ci_if_error: true
           flags: go
