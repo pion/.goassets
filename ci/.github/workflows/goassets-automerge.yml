@@ -17,8 +17,10 @@ on:
     types: [opened]
 
 permissions:
+  checks: read
   contents: write
   pull-requests: write
+  statuses: read
 
 jobs:
   auto-merge:
@@ -28,6 +30,7 @@ jobs:
       github.event.pull_request.base.ref == 'main' &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-26.04
+    timeout-minutes: 60
     steps:
       - name: Validate .goassets PR
         env:
@@ -45,8 +48,15 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: gh pr review "$PR_URL" --approve
 
-      - name: Enable auto-merge
+      - name: Wait for required checks
         env:
           GH_TOKEN: ${{ github.token }}
           PR_URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr merge "$PR_URL" --auto --rebase
+        run: gh pr checks "$PR_URL" --required --watch --fail-fast
+
+      - name: Merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: gh pr merge "$PR_URL" --rebase --match-head-commit "$HEAD_SHA"
