@@ -27,6 +27,12 @@ jobs:
           key: ${{ runner.os }}-i386-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-i386-go-
 
+      # https://docs.docker.com/engine/release-notes/29/#2943
+      - name: Set up Docker
+        uses: docker/setup-docker-action@v5
+        with:
+          version: v29.4.3
+
       # Github runners do not support native external IPv6 connectivity:
       #              https://github.com/actions/runner-images/issues/668
       # This customization can be removed after IPv6 is natively supported.
