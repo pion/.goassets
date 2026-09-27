@@ -27,6 +27,11 @@ jobs:
           key: ${{ runner.os }}-windows-go-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-windows-go-
 
+      - name: Setup Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: ${{ inputs.go-version }}
+
       - name: Run tests
         shell: bash
         run: |
@@ -34,4 +39,3 @@ jobs:
           if [ -n "${SKIP_WINDOWS_TESTS}" ]; then exit 0; fi
 
           go test -race ./...
-
