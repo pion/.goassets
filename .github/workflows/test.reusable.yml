@@ -72,7 +72,9 @@ jobs:
           if-no-files-found: error
 
       - uses: codecov/codecov-action@v7
-        if: runner.os == 'Linux' && inputs.go-version == steps.coverage.outputs.version
+        # Temporarily disable Codecov reporting because it's down
+        # if: runner.os == 'Linux' && inputs.go-version == steps.coverage.outputs.version
+        if: ${{ false }}
         with:
           fail_ci_if_error: true
           flags: go
