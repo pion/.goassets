@@ -15,7 +15,7 @@ import (
 )
 
 func validateSubject(subj string) (bool, string) {
-	if len(subj) > 50 {
+	if len(subj) > 72 {
 		matched, err := regexp.Match("^Update module [0-9a-zA-Z./]+ to v[0-9]+\\.[0-9]+\\.[0-9]+( \\[.*\\])?$", []byte(subj))
 		if err != nil {
 			log.Fatal(err)
@@ -23,7 +23,7 @@ func validateSubject(subj string) (bool, string) {
 		if matched {
 			fmt.Println("Ignored subject line length error for module update commit")
 		} else {
-			return false, "Limit the subject line to 50 characters"
+			return false, "Limit the subject line to 72 characters"
 		}
 	}
 	capitalized, _ := regexp.Match("^[A-Z]", []byte(subj))
@@ -50,7 +50,7 @@ func printError(err_msg string, commit_msg string) {
 it failed '%s' of the following checks
 
 * Separate subject from body with a blank line
-* Limit the subject line to 50 characters
+* Limit the subject line to 72 characters
 * Capitalize the subject line
 * Do not end the subject line with a period
 * Wrap the body at 72 characters
