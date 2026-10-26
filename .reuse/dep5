@@ -2,7 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Pion Goassets
 Source: https://github.com/pion/.goassets
 
-Files: README.md AUTHORS.txt renovate.json ci/renovate.json
+Files: README.md AUTHORS.txt renovate.json ci/renovate.json ci/AGENTS.md
 Copyright: 2023 The Pion community <https://pion.ly>
 License: MIT
 
